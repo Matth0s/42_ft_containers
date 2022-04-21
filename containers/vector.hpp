@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 18:58:30 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/20 23:38:42 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:38:39 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ namespace ft
 			};
 
 			template <class InputIterator>
-			vector( InputIterator first,
-					InputIterator last,
-					const allocator_type& alloc = allocator_type() )
+			vector( typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type first,
+					InputIterator last, const allocator_type& alloc = allocator_type() )
 			:	_size(last - first), _capacity(last - first), _alloc(alloc),
 				_data(this->_alloc.allocate(this->_capacity)) {
 				for (size_type i = 0; i < this->_size; i++) {

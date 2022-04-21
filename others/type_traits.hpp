@@ -6,12 +6,12 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:03:17 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/20 23:21:09 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/04/21 03:17:56 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPE_TRAITS_HPP
-# define TYPE_TRAITS_HPP
+#ifndef FT_TYPE_TRAITS_HPP
+# define FT_TYPE_TRAITS_HPP
 
 namespace ft
 {

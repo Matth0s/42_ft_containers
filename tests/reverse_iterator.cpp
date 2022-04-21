@@ -6,16 +6,12 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:23:03 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/14 17:41:50 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/04/21 04:52:38 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "reverse_iterator.hpp"
 #include "vector_iterator.hpp"
-
-#include <iostream>
-#include <vector>
-
 
 int	main( void )
 {
