@@ -6,7 +6,7 @@
 #    By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 02:30:49 by mmoreira          #+#    #+#              #
-#    Updated: 2022/04/21 18:51:01 by mmoreira         ###   ########.fr        #
+#    Updated: 2022/04/21 20:34:06 by mmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,12 +46,12 @@ TEST_VEC_ITER	=	veciter
 TEST_REV_ITER	=	reviter
 TEST_TYPE_TRAITS=	typetraits
 TEST_UTILITY	=	utility
-TESTE_ALGORITHM	=	algorithm
+TEST_ALGORITHM	=	algorithm
 TEST_VECTOR		=	vector
 
 ALL_TEST	= $(TEST_VEC_ITER) $(TEST_REV_ITER) \
 			$(TEST_TYPE_TRAITS) $(TEST_UTILITY) \
-			$(TESTE_ALGORITHM) $(TEST_VECTOR)
+			$(TEST_ALGORITHM) $(TEST_VECTOR)
 
 
 CFLAGS	=	-Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
@@ -92,7 +92,7 @@ teste:			$(ALL_TEST)
 	@./$(TEST_UTILITY)
 	@echo "*******************************"
 	@echo "***********algorithm***********"
-	@./$(TESTE_ALGORITHM)
+	@./$(TEST_ALGORITHM)
 	@echo "*******************************"
 	@echo "*********Vector Testes*********"
 	@./$(TEST_VECTOR)
