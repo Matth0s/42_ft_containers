@@ -27,7 +27,8 @@ VECTOR_OBJ		=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(VECTOR))
 
 INCD_DIR=	-I ./ \
 			-I ./containers \
-			-I ./iterators
+			-I ./iterators \
+			-I ./others
 VEC_ITER_INCD	= vector_iterator.hpp
 REV_ITER_INCD	= reverse_iterator.hpp
 TYPE_TRAITS_INCD= type_traits.hpp
@@ -46,7 +47,7 @@ TEST_REV_ITER	=	reviter
 TEST_TYPE_TRAITS=	typetraits
 TEST_VECTOR		=	vector
 
-ALL_TEST= $(TEST_VEC_ITER) $(TEST_REV_ITER) $(TEST_TYPE_TRAITS) $(TEST_VECTOR) 
+ALL_TEST= $(TEST_VEC_ITER) $(TEST_REV_ITER) $(TEST_TYPE_TRAITS) $(TEST_VECTOR)
 
 CFLAGS	=	-Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
 

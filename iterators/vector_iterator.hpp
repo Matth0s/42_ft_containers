@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_ITERATOR_HPP
-# define VECTOR_ITERATOR_HPP
+#ifndef FT_VECTOR_ITERATOR_HPP
+# define FT_VECTOR_ITERATOR_HPP
 
 #include "iterator_traits.hpp"
 

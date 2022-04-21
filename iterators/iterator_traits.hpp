@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITERATOR_TRAITS_HPP
-# define ITERATOR_TRAITS_HPP
+#ifndef FT_ITERATOR_TRAITS_HPP
+# define FT_ITERATOR_TRAITS_HPP
 
 #include <iostream>
 
