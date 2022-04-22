@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:23:03 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/21 04:52:38 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/04/22 19:50:43 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,9 @@ int	main( void )
 	std::cout << (*(5 + rev_it3) == 3 ?"✅":"❌") << std::endl;
 
 	std::cout << "operator - b |";
-	std::cout << (rev_it1 - rev_it2 == -2 ?"✅":"❌");
-	std::cout << (rev_it2 - rev_it1 == 2 ?"✅":"❌");
-	std::cout << (rev_it3 - rev_it1 == 5 ?"✅":"❌") << std::endl;
-
+	std::cout << (rev_it1 - rev_it2 == 2 ?"✅":"❌");
+	std::cout << (rev_it2 - rev_it1 == -2 ?"✅":"❌");
+	std::cout << (rev_it3 - rev_it1 == -5 ?"✅":"❌") << std::endl;
 
 	std::cout << "operator ==  |";
 	std::cout << (rev_it1 == rev_it1 ?"✅":"❌");

@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 21:27:13 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/21 22:07:04 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/04/22 21:50:37 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ namespace ft
 			random_access_iterator( const iterator& src ): _ptr(src.base()) {};
 			~random_access_iterator( void ) {};
 
-			iterator&	operator=( const iterator& rhs ) {
-				if (this != &rhs)
-					this->_ptr = rhs._ptr;
-				return (*this);
-			};
+			// iterator&	operator=( const iterator& rhs ) {
+			// 	if (this != &rhs)
+			// 		this->_ptr = rhs._ptr;
+			// 	return (*this);
+			// };
 
 			pointer	base( void ) const {
 				return (this->_ptr);

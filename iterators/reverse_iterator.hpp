@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:23:50 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/19 13:03:35 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/04/22 19:50:17 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ namespace ft
 	typename reverse_iterator<Iterator>::difference_type	operator-(
 		const reverse_iterator<Iterator>& lhs,
 		const reverse_iterator<Iterator>& rhs ) {
-		return (lhs.base() - rhs.base());
+		return (rhs.base() - lhs.base());
 	};
 
 	template <class Iterator>
