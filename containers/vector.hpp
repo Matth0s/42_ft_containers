@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 18:58:30 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/21 16:38:39 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/04/22 05:41:42 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,26 @@ namespace ft
 			typedef std::ptrdiff_t									difference_type;
 			typedef std::size_t										size_type;
 
+		// template <std::size_t n, std::size_t c>
+		// class out_of_range : public std::exception
+		// {
+		// 	std::string	msg;
+		// 	msg.append("vector::out_of_range: n (which is ");  + n + ") >= this->_size() (which is " + c +")";
+		// 	public:
+		// 		virtual const char* what() const throw() {
+		// 			return (msg.c_str());
+		// 		};
+		// };
+
 		private:
+			class _out_of_range : public std::exception {
+				public:
+					virtual const char* what() const throw() {
+						return ("vector::out_of_range: n >= this->_size()");
+				};
+		};
+
+		protected:
 			size_type		_size;
 			size_type		_capacity;
 			allocator_type	_alloc;
@@ -77,8 +96,10 @@ namespace ft
 			};
 
 			vector&	operator=( const vector& rhs ) {
-				if (this != &rhs) {
-					if (this->_capacity < rhs._size) {
+				if (this != &rhs)
+				{
+					if (this->_capacity < rhs._size)
+					{
 						for (size_type i = 0; i < this->_size; i++)
 							this->_alloc.destroy(this->_data + i);
 						this->_alloc.deallocate(this->_data, this->_capacity);
@@ -130,29 +151,63 @@ namespace ft
 			/* Capacity: */
 
 			// size
-			// size_type	size( void ) const {
-			// 	return (this->_size);
-			// };
+			size_type	size( void ) const {
+				return (this->_size);
+			};
 
 			// max_size
-			// size_type	max_size( void ) const {
-				// return (this->_alloc.max_size());
-			// };
+			size_type	max_size( void ) const {
+				return (this->_alloc.max_size());
+			};
 
 			// resize
-			// void	resize( size_type n, value_type val = value_type() );
+			void	resize( size_type n, value_type val = value_type() ) {
+				if (n <= this->_size)
+					for (size_type i = n; i < this->_size; i++)
+						this->_alloc.destroy(this->_data + i);
+				else if (n <= this->_capacity)
+					for (size_type i = this->_size; i < n; i++)
+						this->_alloc.construct(this->_data + i, val);
+				else
+				{
+					value_type*	data = this->_alloc.allocate(n);
+					for (size_type i = 0; i < this->_size; i++) {
+						this->_alloc.construct(data + i, *(this->_data + i));
+						this->_alloc.destroy(this->_data + i);
+					}
+					for (size_type i = this->_size; i < n; i++)
+						this->_alloc.construct(data + i, val);
+					this->_alloc.deallocate(this->_data, this->_capacity);
+					this->_data = data;
+					this->_capacity = n;
+				}
+				this->_size = n;
+			};
 
 			// capacity
-			// size_type	capacity( void ) const {
-				// return (this->_capacity);
-			// };
+			size_type	capacity( void ) const {
+				return (this->_capacity);
+			};
 
 			// empty
-			// bool	empty( void ) const {
-				// return (this->_size == 0);
-			// };
+			bool	empty( void ) const {
+				return (this->_size == 0);
+			};
+
 			// reserve
-			// void reserve (size_type n);
+			void reserve( size_type n ) {
+				if (this->_capacity < n)
+				{
+					value_type*	data = this->_alloc.allocate(n);
+					for (size_type i = 0; i < this->_size; i++) {
+						this->_alloc.construct(data + i, *(this->_data + i));
+						this->_alloc.destroy(this->_data + i);
+					}
+					this->_alloc.deallocate(this->_data, this->_capacity);
+					this->_data = data;
+					this->_capacity = n;
+				}
+			};
 
 
 			/* Element access: */
@@ -166,32 +221,32 @@ namespace ft
 			};
 
 			// at
-			// reference	at( size_type n ) {
-			// 	if (n < 0 || n >= this->_size)
-			// 		throw std::out_of_range();
-			// 	return (*(this->_data + n));
-			// };
-			// const_reference	at( size_type n ) const {
-			// 	if (n < 0 || n >= this->_size)
-			// 		throw std::out_of_range();
-			// 	return (*(this->_data + n));
-			// };
+			reference	at( size_type n ) {
+				if (n < 0 || n >= this->_size)
+					throw vector::_out_of_range();
+				return (*(this->_data + n));
+			};
+			const_reference	at( size_type n ) const {
+				if (n < 0 || n >= this->_size)
+					throw vector::_out_of_range();
+				return (*(this->_data + n));
+			};
 
 			// front
-			// reference	front( void ) {
-				// return (*this->_data);
-			// };
-			// const_reference	front( void ) const {
-				// return (*this->_data);
-			// };
+			reference	front( void ) {
+				return (*this->_data);
+			};
+			const_reference	front( void ) const {
+				return (*this->_data);
+			};
 
 			// back
-			// reference	back( void ) {
-				// return (*(this->_data + this->_size - 1));
-			// };
-			// const_reference	back( void ) const {
-				// return (*(this->_data + this->_size - 1));
-			// };
+			reference	back( void ) {
+				return (*(this->_data + this->_size - 1));
+			};
+			const_reference	back( void ) const {
+				return (*(this->_data + this->_size - 1));
+			};
 
 
 			// assign
@@ -203,36 +258,14 @@ namespace ft
 			// clear
 
 			// get_allocator
-			// allocator_type get_allocator( void ) const {
-			// 	return (allocator_type(this->_alloc));
-			// };
+			allocator_type get_allocator( void ) const {
+				return (allocator_type(this->_alloc));
+			};
 
 			// relational operators
 			// swap
 	};
 }
-
-
-// (construtor) ^^
-// (destruidor) ^^
-// operador= ----------------
-
-// begin ^^
-// end ^^
-// rbegin ^^
-// rend ^^
-
-// size ^^
-// max_size ^^
-// resize ----------------
-// capacity ^^
-// empty ^^
-// reserve ----------------
-
-// operator[] ^^
-// at ----------------
-// front ^^
-// back ^^
 
 // assign ----------------
 // push_back ----------------
@@ -242,10 +275,7 @@ namespace ft
 // swap ----------------
 // clear ----------------
 
-// get_allocator ^^
-
 // relational operators ----------------
 // swap ----------------
-
 
 #endif
