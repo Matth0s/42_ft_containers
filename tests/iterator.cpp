@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:35:48 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/22 19:50:51 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/04/23 15:00:38 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main( void )
 	int	array2[] = {11,12,13,14,15,16,17,18,19,20};
 
 	try {
-		ft::random_access_iterator<int> it3;
+		ft::random_access_iterator<int*> it3;
 		std::cout << "Default Constructor  |✅" << std::endl;
 	} catch(std::exception& ex)	{
 		std::cout << "Default Constructor  |❌" << std::endl;
@@ -26,7 +26,7 @@ int	main( void )
 	}
 
 	try {
-		ft::random_access_iterator<int> it1(array1);
+		ft::random_access_iterator<int*> it1(array1);
 		std::cout << "Pointer Constructor  |✅" << std::endl;
 	} catch(std::exception& ex) {
 		std::cout << "Pointer Constructor  |❌" << std::endl;
@@ -34,8 +34,8 @@ int	main( void )
 	}
 
 	try {
-		ft::random_access_iterator<int> it1(array1);
-		ft::random_access_iterator<int> it2(it1);
+		ft::random_access_iterator<int*> it1(array1);
+		ft::random_access_iterator<int*> it2(it1);
 		std::cout << "Copy Constructor     |✅" << std::endl;
 	} catch(std::exception& ex) {
 		std::cout << "Copy Constructor     |❌" << std::endl;
@@ -43,8 +43,8 @@ int	main( void )
 	}
 
 	try {
-		ft::random_access_iterator<int> it1(array1);
-		ft::random_access_iterator<int> it2;
+		ft::random_access_iterator<int*> it1(array1);
+		ft::random_access_iterator<int*> it2;
 		it2 = it1;
 		if (*it1 == *it2)
 			std::cout << "Assignment Operator  |✅" << std::endl;
@@ -53,9 +53,9 @@ int	main( void )
 		std::cout << ex.what() << std::endl;
 	}
 
-	ft::random_access_iterator<int> it1(array1);
-	ft::random_access_iterator<int> it2(array1);
-	ft::random_access_iterator<int> it3(array2);
+	ft::random_access_iterator<int*> it1(array1);
+	ft::random_access_iterator<int*> it2(array1);
+	ft::random_access_iterator<int*> it3(array2);
 
 	std::cout << "operator *   |";
 	try {

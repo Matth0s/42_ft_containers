@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:42:22 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/22 21:56:27 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/04/23 15:06:40 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #endif
 
 #include <iostream>
+#include "stdio.h"
 
 int	main( void )
 {
@@ -116,30 +117,6 @@ int	main( void )
 			std::cout << (cont == 10 ?"✅":"❌") << std::endl;
 		}
 
-		// std::cout << "const [begin() & end()]   |";
-		// {
-		// 	ft::vector<int>::const_iterator it;
-		// 	ft::vector<int>::const_iterator i;
-
-		// 	i = vec1.begin();
-		// 	cont = 0;
-		// 	for (it = vec1.begin(); it < vec1.end(); it++)
-		// 		cont += (*it == array[it - i]? 1: 0);
-		// 	std::cout << (cont == 10 ?"✅":"❌");
-
-		// 	i = vec2.begin();
-		// 	cont = 0;
-		// 	for (it = vec2.begin(); it < vec2.end(); it++)
-		// 		cont += (*it == array[it - i + 5]? 1: 0);
-		// 	std::cout << (cont == 5 ?"✅":"❌");
-
-		// 	i = vec3.begin();
-		// 	cont = 0;
-		// 	for (it = vec3.begin(); it < vec3.end(); it++)
-		// 		cont += (*it == ar[it - i]? 1: 0);
-		// 	std::cout << (cont == 10 ?"✅":"❌") << std::endl;
-		// }
-
 		std::cout << "rbegin() & rend()         |";
 		{
 			ft::vector<int>::reverse_iterator it;
@@ -164,29 +141,55 @@ int	main( void )
 			std::cout << (cont == 10 ?"✅":"❌")<< std::endl;
 		}
 
-		// std::cout << "const [rbegin() & rend()] |";
-		// {
-		// 	ft::vector<int>::reverse_iterator it;
-		// 	ft::vector<int>::reverse_iterator i;
+		{
+			// std::cout << "const [begin() & end()]   |";
+			// {
+			// 	ft::vector<int>::const_iterator it;
+			// 	ft::vector<int>::const_iterator i;
 
-		// 	i = vec1.rbegin();
-		// 	cont = 0;
-		// 	for (it = vec1.rbegin(); it < vec1.rend(); it++)
-		// 		cont += (*it == array[10 - (it - i + 1)]? 1: 0);
-		// 	std::cout << (cont == 10 ?"✅":"❌");
+			// 	i = vec1.begin();
+			// 	cont = 0;
+			// 	for (it = vec1.begin(); it < vec1.end(); it++)
+			// 		cont += (*it == array[it - i]? 1: 0);
+			// 	std::cout << (cont == 10 ?"✅":"❌");
 
-		// 	i = vec2.rbegin();
-		// 	cont = 0;
-		// 	for (it = vec2.rbegin(); it < vec2.rend(); it++)
-		// 		cont += (*it == array[10 - (it - i + 1)]? 1: 0);
-		// 	std::cout << (cont == 5 ?"✅":"❌");
+			// 	i = vec2.begin();
+			// 	cont = 0;
+			// 	for (it = vec2.begin(); it < vec2.end(); it++)
+			// 		cont += (*it == array[it - i + 5]? 1: 0);
+			// 	std::cout << (cont == 5 ?"✅":"❌");
 
-		// 	i = vec3.rbegin();
-		// 	cont = 0;
-		// 	for (it = vec3.rbegin(); it < vec3.rend(); it++)
-		// 		cont += (*it == ar[it - i]? 1: 0);
-		// 	std::cout << (cont == 10 ?"✅":"❌")<< std::endl;
-		// }
+			// 	i = vec3.begin();
+			// 	cont = 0;
+			// 	for (it = vec3.begin(); it < vec3.end(); it++)
+			// 		cont += (*it == ar[it - i]? 1: 0);
+			// 	std::cout << (cont == 10 ?"✅":"❌") << std::endl;
+			// }
+
+			// std::cout << "const [rbegin() & rend()] |";
+			// {
+			// 	ft::vector<int>::reverse_iterator it;
+			// 	ft::vector<int>::reverse_iterator i;
+
+			// 	i = vec1.rbegin();
+			// 	cont = 0;
+			// 	for (it = vec1.rbegin(); it < vec1.rend(); it++)
+			// 		cont += (*it == array[10 - (it - i + 1)]? 1: 0);
+			// 	std::cout << (cont == 10 ?"✅":"❌");
+
+			// 	i = vec2.rbegin();
+			// 	cont = 0;
+			// 	for (it = vec2.rbegin(); it < vec2.rend(); it++)
+			// 		cont += (*it == array[10 - (it - i + 1)]? 1: 0);
+			// 	std::cout << (cont == 5 ?"✅":"❌");
+
+			// 	i = vec3.rbegin();
+			// 	cont = 0;
+			// 	for (it = vec3.rbegin(); it < vec3.rend(); it++)
+			// 		cont += (*it == ar[it - i]? 1: 0);
+			// 	std::cout << (cont == 10 ?"✅":"❌")<< std::endl;
+			// }
+		}
 	}
 
 	std::cout << std::endl;
@@ -459,35 +462,222 @@ int	main( void )
 		std::cout << ((vec4.size() == (size - 2))?"✅":"❌") << std::endl;
 	}
 
-	// insert
-
-	std::cout << "erase()            |";
+	std::cout << "single insert()    |";
 	{
-		ft::vector<int>				vec4(vec1);
+		ft::vector<int> vec4(vec3);
+		int				cont;
+		vec4.insert(vec4.begin() + 2, 55);
+		{
+			int	ar[] = {6, 7, 55, 8, 9, 10,};
+			cont = 0;
+			cont += (vec4.size() == 6? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar[i]? 1: 0);
+			cont += (vec4.capacity() == 10? 1: 0);
+			std::cout << (cont == (2 + 6) ?"✅":"❌");
+		}
+		vec4.insert(vec4.begin() + 5, 0);
+		{
+			int	ar[] = {6, 7, 55, 8, 9, 0, 10};
+			cont = 0;
+			cont += (vec4.size() == 7? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar[i]? 1: 0);
+			cont += (vec4.capacity() == 10? 1: 0);
+			std::cout << (cont == (2 + 7) ?"✅":"❌");
+		}
+		vec4.insert(vec4.end() - 2, -100);
+		vec4.insert(vec4.end() - 2, -100);
+		vec4.insert(vec4.end() - 2, -100);
+		vec4.insert(vec4.end() - 2, -100);
+		{
+			int	ar[] = {6, 7, 55, 8, 9, -100, -100, -100, -100, 0, 10};
+			cont = 0;
+			cont += (vec4.size() == 11? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar[i]? 1: 0);
+			cont += (vec4.capacity() == 20? 1: 0);
+			std::cout << (cont == (2 + 11) ?"✅":"❌") << std::endl;
+		}
+	}
+
+	std::cout << "fill insert()      |";
+	{
+		ft::vector<int> vec4(vec3);
+		int				cont;
+		{
+			vec4.insert(vec4.begin() + 4, 1,55);
+			int	ar1[] = {6, 7, 8, 9, 55, 10};
+			cont = 0;
+			cont += (vec4.size() == 6? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar1[i]? 1: 0);
+			cont += (vec4.capacity() == 10? 1: 0);
+
+ 			vec4.insert(vec4.begin() + 4, 7,55);
+			int	ar2[] = {6, 7, 8, 9, 55, 55, 55, 55, 55, 55, 55, 55, 10};
+			cont += (vec4.size() == 13? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar2[i]? 1: 0);
+			cont += (vec4.capacity() == 13? 1: 0);
+			std::cout << (cont == (2 + 13 + 2 + 6) ?"✅":"❌");
+		}
+		{
+			vec4.insert(vec4.begin() + 4, 8,55);
+			int	ar1[] = {6, 7, 8, 9, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 10};
+			cont = 0;
+			cont += (vec4.size() == 21? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar1[i]? 1: 0);
+			cont += (vec4.capacity() == 26? 1: 0);
+
+			vec4.insert(vec4.begin() + 10, 20, -15);
+			int	ar2[] = {6, 7, 8, 9, 55, 55, 55, 55, 55, 55, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 10};
+			cont += (vec4.size() == 41? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar2[i]? 1: 0);
+			cont += (vec4.capacity() == 42? 1: 0);
+			std::cout << (cont == (2 + 41 + 2 + 21) ?"✅":"❌");
+		}
+		{
+			vec4.insert(vec4.begin() + 10, 50, -15);
+			int	ar1[] = {6, 7, 8, 9, 55, 55, 55, 55, 55, 55, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 10};
+			cont = 0;
+			cont += (vec4.size() == 91? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar1[i]? 1: 0);
+			cont += (vec4.capacity() == 91? 1: 0);
+
+			vec4.insert(vec4.begin() + 10, 10, 2);
+			int	ar2[] = {6, 7, 8, 9, 55, 55, 55, 55, 55, 55, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, -15, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 10};
+			cont += (vec4.size() == 101? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar2[i]? 1: 0);
+			cont += (vec4.capacity() == 182? 1: 0);
+			std::cout << (cont == (2 + 101 + 2 + 91) ?"✅":"❌") << std::endl;
+		}
+	}
+
+	std::cout << "range insert()     |";
+	{
+
+		int	ar[] = {6, 7, 55, 8, 55, 55, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 9, 10};
+		ft::vector<int>	vec4(vec1);
+		ft::vector<int> vec5(ar, ar + 30);
+		vec4.reserve(20);
+		int				cont;
+		{
+			vec4.insert(vec4.begin() + 9, vec5.begin(), vec5.begin() + 1);
+			int	ar1[] = {1, 2, 3, 4, 5, 6, 0, 2, 2, 6, 2, 2, 2, 2, 2, 2};
+			cont = 0;
+			cont += (vec4.size() == 16? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar1[i]? 1: 0);
+			cont += (vec4.capacity() == 20? 1: 0);
+
+			vec4.insert(vec4.begin() + 15, vec5.begin(), vec5.begin() + 5);
+			int	ar2[] = {1, 2, 3, 4, 5, 6, 0, 2, 2, 6, 2, 2, 2, 2, 2, 6, 7, 55, 8, 55, 2};
+			cont += (vec4.size() == 21? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar2[i]? 1: 0);
+			cont += (vec4.capacity() == 32? 1: 0);
+			std::cout << (cont == (2 + 21 + 2 + 16) ?"✅":"❌");
+		}
+		{
+			vec4.insert(vec4.begin() + 13, vec5.begin(), vec5.end());
+			int	ar1[] = {1, 2, 3, 4, 5, 6, 0, 2, 2, 6, 2, 2, 2, 6, 7, 55, 8, 55, 55, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 9, 10, 2, 2, 6, 7, 55, 8, 55, 2};
+			cont = 0;
+			cont += (vec4.size() == 51? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar1[i]? 1: 0);
+			cont += (vec4.capacity() == 51? 1: 0);
+
+			vec4.insert(vec4.begin() + 32, vec5.begin(), vec5.end());
+			int	ar2[] = {1, 2, 3, 4, 5, 6, 0, 2, 2, 6, 2, 2, 2, 6, 7, 55, 8, 55, 55, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 55, 55, 6, 7, 55, 8, 55, 55, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 9, 10, 55, 1, 2, 3, 4, 5, 6, 0, 2, 9, 10, 2, 2, 6, 7, 55, 8, 55, 2 };
+			cont += (vec4.size() == 81? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar2[i]? 1: 0);
+			cont += (vec4.capacity() == 102? 1: 0);
+			std::cout << (cont == (2 + 81 + 2 + 51) ?"✅":"❌");
+		}
+		{
+			ft::vector<int>	vec6(vec4);
+			vec6.insert(vec6.begin() + 60, vec4.begin(), vec4.end());
+
+			vec4.insert(vec4.begin() + 32, vec6.begin(), vec6.end());
+			int	ar1[] = {1, 2, 3, 4, 5, 6, 0, 2, 2, 6, 2, 2, 2, 6, 7, 55, 8, 55, 55, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 2, 6, 2, 2, 2, 6, 7, 55, 8, 55, 55, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 55, 55, 6, 7, 55, 8, 55, 55, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 1, 2, 3, 4, 5, 6, 0, 2, 2, 6, 2, 2, 2, 6, 7, 55, 8, 55, 55, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 55, 55, 6, 7, 55, 8, 55, 55, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 9, 10, 55, 1, 2, 3, 4, 5, 6, 0, 2, 9, 10, 2, 2, 6, 7, 55, 8, 55, 2, 9, 10, 55, 1, 2, 3, 4, 5, 6, 0, 2, 9, 10, 2, 2, 6, 7, 55, 8, 55, 2, 6, 7, 55, 8, 55, 55, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 55, 55, 55, 1, 2, 3, 4, 5, 6, 0, 2, 9, 10, 55, 1, 2, 3, 4, 5, 6, 0, 2, 9, 10, 2, 2, 6, 7, 55, 8, 55, 2};
+			cont = 0;
+			cont += (vec4.size() == 243? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar1[i]? 1: 0);
+			cont += (vec4.capacity() == 243? 1: 0);
+			std::cout << (cont == (2 + 243) ?"✅":"❌") << std::endl;
+		}
+	}
+
+	std::cout << "single erase()     |";
+	{
+		ft::vector<int>	vec4(vec1);
+		int				cont;
 		vec4.erase(vec4.begin());
+		{
+			int	ar[] = {2, 3, 4, 5, 6, 0, 2, 2, 2, 2, 2, 2, 2, 2};
+			cont = 0;
+			cont += (vec4.size() == 14? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar[i]? 1: 0);
+			cont += (vec4.capacity() == 15? 1: 0);
+			std::cout << (cont == (2 + 14) ?"✅":"❌");
+		}
 		vec4.erase(vec4.begin() + 5);
 		{
 			int	ar[] = {2, 3, 4, 5, 6, 2, 2, 2, 2, 2, 2, 2, 2};
-			int cont = 0;
+			cont = 0;
 			cont += (vec4.size() == 13? 1: 0);
 			for (std::size_t i = 0; i < vec4.size(); i++)
 				cont += (vec4[i] == ar[i]? 1: 0);
 			cont += (vec4.capacity() == 15? 1: 0);
 			std::cout << (cont == (2 + 13) ?"✅":"❌");
 		}
-		vec4.erase(vec4.begin() + 4, vec4.begin() + 9);
+		vec4.erase(vec4.begin() + 9);
 		{
-			int	ar[] = {2, 3, 4, 5, 2, 2, 2, 2};
-			int cont = 0;
-			cont += (vec4.size() == 8? 1: 0);
+			int	ar[] = {2, 3, 4, 5, 6, 2, 2, 2, 2, 2, 2, 2};
+			cont = 0;
+			cont += (vec4.size() == 12? 1: 0);
 			for (std::size_t i = 0; i < vec4.size(); i++)
 				cont += (vec4[i] == ar[i]? 1: 0);
 			cont += (vec4.capacity() == 15? 1: 0);
-			std::cout << (cont == (2 + 8) ?"✅":"❌");
+			std::cout << (cont == (2 + 12) ?"✅":"❌") << std::endl;
+		}
+	}
+
+	std::cout << "range erase()      |";
+	{
+		ft::vector<int>	vec4(vec1);
+		int				cont;
+		vec4.erase(vec4.begin() + 2, vec4.end() - 8);
+		{
+			int	ar[] = {1, 2, 2, 2, 2, 2, 2, 2, 2, 2};
+			cont = 0;
+			cont += (vec4.size() == 10? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar[i]? 1: 0);
+			cont += (vec4.capacity() == 15? 1: 0);
+			std::cout << (cont == (2 + 10) ?"✅":"❌");
+		}
+		vec4.erase(vec4.begin() + 4, vec4.begin() + 9);
+		{
+			int	ar[] = {1, 2, 2, 2, 2};
+			cont = 0;
+			cont += (vec4.size() == 5? 1: 0);
+			for (std::size_t i = 0; i < vec4.size(); i++)
+				cont += (vec4[i] == ar[i]? 1: 0);
+			cont += (vec4.capacity() == 15? 1: 0);
+			std::cout << (cont == (2 + 5) ?"✅":"❌");
 		}
 		vec4.erase(vec4.begin(), vec4.end());
 		{
-			int cont = 0;
+			cont = 0;
 			cont += (vec4.size() == 0? 1: 0);
 			cont += (vec4.capacity() == 15? 1: 0);
 			std::cout << (cont == 2 ?"✅":"❌") << std::endl;
@@ -546,39 +736,40 @@ int	main( void )
 		std::cout << (((vec3.size() == 0) && (vec3.capacity() == 5))?"✅":"❌") << std::endl;
 	}
 
+	std::cout << std::endl;
 
-	// {
-	// 	std::cout << "operator ==  |";
-	// 	std::cout << (rev_it1 == rev_it1 ?"✅":"❌");
-	// 	std::cout << (rev_it1 == rev_it2 ?"❌":"✅");
-	// 	std::cout << (rev_it1 == rev_it3 ?"❌":"✅") << std::endl;
+	{
+		std::cout << "operator ==        |";
+		std::cout << (vec1 == vec1 ?"✅":"❌");
+		std::cout << (vec2 == vec1 ?"✅":"❌");
+		std::cout << (vec1 == vec3 ?"✅":"❌") << std::endl;
 
-	// 	std::cout << "operator !=  |";
-	// 	std::cout << (rev_it1 != rev_it1 ?"❌":"✅");
-	// 	std::cout << (rev_it1 != rev_it2 ?"✅":"❌");
-	// 	std::cout << (rev_it1 != rev_it3 ?"✅":"❌") << std::endl;
+		std::cout << "operator !=        |";
+		std::cout << (vec1 != vec1 ?"❌":"✅");
+		std::cout << (vec1 != vec2 ?"❌":"✅");
+		std::cout << (vec1 != vec3 ?"❌":"✅") << std::endl;
 
-	// 	std::cout << "operator <   |";
-	// 	std::cout << (rev_it1 < rev_it1 ?"❌":"✅");
-	// 	std::cout << (rev_it1 < rev_it2 ?"❌":"✅");
-	// 	std::cout << (rev_it2 < rev_it1 ?"✅":"❌") << std::endl;
+		std::cout << "operator <         |";
+		std::cout << (vec1 < vec1 ?"❌":"✅");
+		std::cout << (vec1 < vec2 ?"❌":"✅");
+		std::cout << (vec2 < vec1 ?"❌":"✅") << std::endl;
 
-	// 	std::cout << "operator <=  |";
-	// 	std::cout << (rev_it1 <= rev_it1 ?"✅":"❌");
-	// 	std::cout << (rev_it1 <= rev_it2 ?"❌":"✅");
-	// 	std::cout << (rev_it2 <= rev_it1 ?"✅":"❌") << std::endl;
+		std::cout << "operator <=        |";
+		std::cout << (vec1 <= vec1 ?"✅":"❌");
+		std::cout << (vec1 <= vec2 ?"✅":"❌");
+		std::cout << (vec2 <= vec1 ?"✅":"❌") << std::endl;
 
-	// 	std::cout << "operator >   |";
-	// 	std::cout << (rev_it1 > rev_it1 ?"❌":"✅");
-	// 	std::cout << (rev_it1 > rev_it2 ?"✅":"❌");
-	// 	std::cout << (rev_it2 > rev_it1 ?"❌":"✅") << std::endl;
+		std::cout << "operator >         |";
+		std::cout << (vec1 > vec1 ?"❌":"✅");
+		std::cout << (vec1 > vec2 ?"❌":"✅");
+		std::cout << (vec2 > vec1 ?"❌":"✅") << std::endl;
 
-	// 	std::cout << "operator >=  |";
-	// 	std::cout << (rev_it1 >= rev_it1 ?"✅":"❌");
-	// 	std::cout << (rev_it1 >= rev_it2 ?"✅":"❌");
-	// 	std::cout << (rev_it2 >= rev_it1 ?"❌":"✅") << std::endl;
+		std::cout << "operator >=        |";
+		std::cout << (vec1 >= vec1 ?"✅":"❌");
+		std::cout << (vec1 >= vec2 ?"✅":"❌");
+		std::cout << (vec2 >= vec1 ?"✅":"❌") << std::endl;
 
-	// }
+	}
 
 	return (0);
 }

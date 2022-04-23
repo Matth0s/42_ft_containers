@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 21:27:13 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/22 21:50:37 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/04/23 06:11:46 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,33 @@
 
 namespace ft
 {
-	template <typename T>
+	template <typename Iterator>
 	class random_access_iterator
 	{
 		public:
-			typedef random_access_iterator<T>							iterator;
-			typedef std::random_access_iterator_tag						iterator_category;
-			typedef typename ft::iterator_traits<T*>::value_type		value_type;
-			typedef typename ft::iterator_traits<T*>::difference_type	difference_type;
-			typedef typename ft::iterator_traits<T*>::pointer			pointer;
-			typedef typename ft::iterator_traits<T*>::reference			reference;
+			typedef Iterator													iterator_type;
+			typedef typename ft::iterator_traits<Iterator>::iterator_category	iterator_category;
+			typedef typename ft::iterator_traits<Iterator>::value_type			value_type;
+			typedef typename ft::iterator_traits<Iterator>::difference_type		difference_type;
+			typedef typename ft::iterator_traits<Iterator>::pointer				pointer;
+			typedef typename ft::iterator_traits<Iterator>::reference			reference;
 
 		protected:
-			pointer	_ptr;
+			iterator_type	_ptr;
 
 		public:
 			random_access_iterator( void ): _ptr(NULL) {};
 			explicit random_access_iterator( pointer ptr ): _ptr(ptr) {};
-			random_access_iterator( const iterator& src ): _ptr(src.base()) {};
+			random_access_iterator( const random_access_iterator& src ): _ptr(src.base()) {};
 			~random_access_iterator( void ) {};
 
-			// iterator&	operator=( const iterator& rhs ) {
-			// 	if (this != &rhs)
-			// 		this->_ptr = rhs._ptr;
-			// 	return (*this);
-			// };
+			random_access_iterator&	operator=( const random_access_iterator& rhs ) {
+				if (this != &rhs)
+					this->_ptr = rhs._ptr;
+				return (*this);
+			};
 
-			pointer	base( void ) const {
+			iterator_type	base( void ) const {
 				return (this->_ptr);
 			};
 
@@ -51,7 +51,7 @@ namespace ft
 				return (*(this->base()));
 			};
 
-			pointer		operator->( void ) const {
+			pointer	operator->( void ) const {
 				return (&(this->operator*()));
 			};
 
@@ -59,41 +59,38 @@ namespace ft
 				return (*(this->_ptr + n));
 			};
 
-			iterator	operator+( difference_type n ) const {
-				return (iterator(this->_ptr + n));
+			random_access_iterator	operator+( difference_type n ) const {
+				return (random_access_iterator(this->_ptr + n));
 			};
 
-			iterator&	operator++( void ) {
+			random_access_iterator&	operator++( void ) {
 				++this->_ptr;
 				return (*this);
 			};
 
-			iterator	operator++( int ) {
-				iterator it(*this);
-				this->_ptr++;
-				return (it);
+			random_access_iterator	operator++( int ) {
+				return (random_access_iterator(this->_ptr++));
 			};
-			iterator&	operator+=( difference_type n) {
+
+			random_access_iterator&	operator+=( difference_type n) {
 				this->_ptr += n;
 				return (*this);
 			};
 
-			iterator	operator-( difference_type n ) const {
-				return (iterator(this->_ptr - n));
+			random_access_iterator	operator-( difference_type n ) const {
+				return (random_access_iterator(this->_ptr - n));
 			};
 
-			iterator&	operator--( void ) {
+			random_access_iterator&	operator--( void ) {
 				--this->_ptr;
 				return (*this);
 			};
 
-			iterator	operator--( int ) {
-				iterator it(*this);
-				this->_ptr--;
-				return (it);
+			random_access_iterator	operator--( int ) {
+				return (random_access_iterator(this->_ptr--));
 			};
 
-			iterator&	operator-=( difference_type n ) {
+			random_access_iterator&	operator-=( difference_type n ) {
 				this->_ptr -= n;
 				return (*this);
 			};

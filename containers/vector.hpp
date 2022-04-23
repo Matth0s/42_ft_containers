@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 18:58:30 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/22 21:55:40 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/04/23 15:32:58 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ namespace ft
 			typedef typename allocator_type::const_reference		const_reference;
 			typedef typename allocator_type::pointer				pointer;
 			typedef typename allocator_type::const_pointer			const_pointer;
-			typedef ft::random_access_iterator<value_type>			iterator;
-			typedef ft::random_access_iterator<const value_type>	const_iterator;
+			typedef ft::random_access_iterator<pointer>				iterator;
+			typedef ft::random_access_iterator<const_pointer>		const_iterator;
 			typedef ft::reverse_iterator<iterator>					reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>			const_reverse_iterator;
 			typedef std::ptrdiff_t									difference_type;
@@ -104,6 +104,7 @@ namespace ft
 			iterator	begin( void ) {
 				return (iterator(this->_data));
 			};
+
 			const_iterator	begin( void ) const {
 				return (const_iterator(this->_data));
 			};
@@ -112,6 +113,7 @@ namespace ft
 			iterator	end( void ) {
 				return (iterator(this->_data + this->_size));
 			};
+
 			const_iterator	end( void ) const {
 				return (const_iterator(this->_data + this->_size));
 			};
@@ -120,6 +122,7 @@ namespace ft
 			reverse_iterator	rbegin( void ) {
 				return (reverse_iterator(this->end()));
 			};
+
 			const_reverse_iterator	rbegin( void ) const {
 				return (const_reverse_iterator(this->end()));
 			};
@@ -128,6 +131,7 @@ namespace ft
 			reverse_iterator	rend( void ) {
 				return (reverse_iterator(this->begin()));
 			};
+
 			const_reverse_iterator	rend( void ) const {
 				return (const_reverse_iterator(this->begin()));
 			};
@@ -194,6 +198,7 @@ namespace ft
 			reference	operator[]( size_type n ) {
 				return (*(this->_data + n));
 			};
+
 			const_reference	operator[]( size_type n ) const {
 				return (*(this->_data + n));
 			};
@@ -204,6 +209,7 @@ namespace ft
 					throw vector::_out_of_range();
 				return (*(this->_data + n));
 			};
+
 			const_reference	at( size_type n ) const {
 				if (n >= this->_size)
 					throw vector::_out_of_range();
@@ -214,6 +220,7 @@ namespace ft
 			reference	front( void ) {
 				return (*this->_data);
 			};
+
 			const_reference	front( void ) const {
 				return (*this->_data);
 			};
@@ -222,10 +229,12 @@ namespace ft
 			reference	back( void ) {
 				return (*(this->_data + this->_size - 1));
 			};
+
 			const_reference	back( void ) const {
 				return (*(this->_data + this->_size - 1));
 			};
 
+			// assign
 			void	assign( size_type n, const value_type& val ) {
 				if (this->_capacity < n)
 				{
@@ -240,7 +249,6 @@ namespace ft
 				}
 			}
 
-			// assign
 			template <class InputIterator>
 			void	assign( typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type
 							first, InputIterator last ) {
@@ -271,14 +279,51 @@ namespace ft
 			};
 
 			// insert
-			// single_element (1)
-			// iterator insert (iterator position, const value_type& val);
-			// fill (2)
-			// void insert (iterator position, size_type n, const value_type& val);
-			// range (3)
-			// template <class InputIterator>
-			// void insert (iterator position, InputIterator first, InputIterator last);
+			iterator	insert( iterator position, const value_type& val ) {
+				difference_type	diff = position - this->begin();
+				if (this->_size == this->_capacity)
+					this->reserve(this->_capacity * 2);
+				position = this->begin() + diff;
+				for (iterator it = this->end(); it != position; it--)
+					this->_alloc.construct(&(*it), *(it - 1));
+				this->_alloc.construct(&(*(position)), val);
+				this->_size++;
+				return (position);
+			};
 
+			void	insert( iterator position, size_type n, const value_type& val ) {
+				difference_type	diff = position - this->begin();
+				if ((this->_size + n > this->_capacity)
+					&& (this->_size + n > this->_size * 2))
+					this->reserve(this->_size + n);
+				else if (this->_size + n > this->_capacity)
+					this->reserve(this->_size * 2);
+				position = this->begin() + diff;
+				for (iterator it = this->end(); it != position; it--)
+					this->_alloc.construct(&(*(it + n - 1)), *(it - 1));
+				for (iterator it = position; it != position + n; it++)
+					this->_alloc.construct(&(*it), val);
+				this->_size += n;
+			};
+
+			template <class InputIterator>
+			void	insert( iterator position, typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type
+							 first,
+							 InputIterator last ) {
+				difference_type	diff = position - this->begin();
+				size_type		n  = last - first;
+				if ((this->_size + n > this->_capacity)
+					&& (this->_size + n > this->_size * 2))
+					this->reserve(this->_size + n);
+				else if (this->_size + n > this->_capacity)
+					this->reserve(this->_size * 2);
+				position = this->begin() + diff;
+				for (iterator it = this->end(); it != position; it--)
+					this->_alloc.construct(&(*(it + n - 1)), *(it - 1));
+				for (iterator it = position; it != position + n; it++)
+					this->_alloc.construct(&(*it), *(first++));
+				this->_size += n;
+			};
 
 			// erase
 			iterator	erase( iterator position ) {
@@ -287,6 +332,7 @@ namespace ft
 				this->_alloc.destroy(this->_data + --this->_size);
 				return (position);
 			};
+
 			iterator	erase( iterator first, iterator last) {
 
 				for (iterator it = last; it < this->end(); it++)
