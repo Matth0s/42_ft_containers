@@ -6,7 +6,7 @@
 #    By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 02:30:49 by mmoreira          #+#    #+#              #
-#    Updated: 2022/04/22 21:34:19 by mmoreira         ###   ########.fr        #
+#    Updated: 2022/04/26 23:53:09 by mmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ TYPE_TRAITS	=	type_traits.cpp
 UTILITY		=	utility.cpp
 ALGORITHM	=	algorithm.cpp
 VECTOR		=	vector.cpp
+STACK		=	stack.cpp
 
 OBJ_DIR			=	./builds
 OBJ				=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
@@ -28,13 +29,15 @@ TYPE_TRAITS_OBJ	=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(TYPE_TRAITS))
 UTILITY_OBJ		=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(UTILITY))
 ALGORITHM_OBJ	=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(ALGORITHM))
 VECTOR_OBJ		=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(VECTOR))
+STACK_OBJ		=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(STACK))
 
 INCD_DIR		=	-I ./ \
 					-I ./containers \
 					-I ./iterators \
 					-I ./others
 INCD			=	vector_iterator.hpp reverse_iterator.hpp \
-					type_traits.hpp algorithm.hpp vector.hpp
+					type_traits.hpp algorithm.hpp vector.hpp \
+					stack.hpp
 #______________________________________//_______________________________________
 vpath %.cpp $(SRC_DIR)
 vpath %.hpp $(INCD_DIR)
@@ -48,11 +51,12 @@ TEST_TYPE_TRAITS=	typetraits
 TEST_UTILITY	=	utility
 TEST_ALGORITHM	=	algorithm
 TEST_VECTOR		=	vector
+TEST_STACK		=	stack
 
 ALL_TEST	= $(TEST_VEC_ITER) $(TEST_REV_ITER) \
 			$(TEST_TYPE_TRAITS) $(TEST_UTILITY) \
-			$(TEST_ALGORITHM) $(TEST_VECTOR)
-
+			$(TEST_ALGORITHM) $(TEST_VECTOR) \
+			$(TEST_STACK)
 
 CFLAGS	=	-Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
 
@@ -96,6 +100,9 @@ teste:			$(ALL_TEST)
 	@echo "*******************************"
 	@echo "*********Vector Testes*********"
 	@./$(TEST_VECTOR)
+	@echo "*******************************"
+	@echo "**********Stack Testes*********"
+	@./$(TEST_STACK)
 	@echo "*******************************"
 
 $(TEST_VEC_ITER):	$(VEC_ITER_OBJ)
@@ -143,6 +150,14 @@ $(TEST_VECTOR):	$(VECTOR_OBJ)
 	@echo "\033[1;32m"
 	@echo "/ ************************************ \\"
 	@echo "|             $(TEST_VECTOR) Criado"
+	@echo "\\ ************************************ /"
+	@echo "\033[0m"
+
+$(TEST_STACK):	$(STACK_OBJ)
+	$(CC) $(CFLAGS) $(STACK_OBJ) $(INCD_DIR) -o $(TEST_STACK)
+	@echo "\033[1;32m"
+	@echo "/ ************************************ \\"
+	@echo "|             $(TEST_STACK) Criado"
 	@echo "\\ ************************************ /"
 	@echo "\033[0m"
 

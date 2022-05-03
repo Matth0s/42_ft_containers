@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:42:22 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/23 15:06:40 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/04/26 23:37:25 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #endif
 
 #include <iostream>
-#include "stdio.h"
 
 int	main( void )
 {
@@ -142,53 +141,53 @@ int	main( void )
 		}
 
 		{
-			// std::cout << "const [begin() & end()]   |";
-			// {
-			// 	ft::vector<int>::const_iterator it;
-			// 	ft::vector<int>::const_iterator i;
+			std::cout << "const [begin() & end()]   |";
+			{
+				ft::vector<int>::const_iterator it;
+				ft::vector<int>::const_iterator i;
 
-			// 	i = vec1.begin();
-			// 	cont = 0;
-			// 	for (it = vec1.begin(); it < vec1.end(); it++)
-			// 		cont += (*it == array[it - i]? 1: 0);
-			// 	std::cout << (cont == 10 ?"✅":"❌");
+				i = vec1.begin();
+				cont = 0;
+				for (it = vec1.begin(); it < vec1.end(); it++)
+					cont += (*it == array[it - i]? 1: 0);
+				std::cout << (cont == 10 ?"✅":"❌");
 
-			// 	i = vec2.begin();
-			// 	cont = 0;
-			// 	for (it = vec2.begin(); it < vec2.end(); it++)
-			// 		cont += (*it == array[it - i + 5]? 1: 0);
-			// 	std::cout << (cont == 5 ?"✅":"❌");
+				i = vec2.begin();
+				cont = 0;
+				for (it = vec2.begin(); it < vec2.end(); it++)
+					cont += (*it == array[it - i + 5]? 1: 0);
+				std::cout << (cont == 5 ?"✅":"❌");
 
-			// 	i = vec3.begin();
-			// 	cont = 0;
-			// 	for (it = vec3.begin(); it < vec3.end(); it++)
-			// 		cont += (*it == ar[it - i]? 1: 0);
-			// 	std::cout << (cont == 10 ?"✅":"❌") << std::endl;
-			// }
+				i = vec3.begin();
+				cont = 0;
+				for (it = vec3.begin(); it < vec3.end(); it++)
+					cont += (*it == ar[it - i]? 1: 0);
+				std::cout << (cont == 10 ?"✅":"❌") << std::endl;
+			}
 
-			// std::cout << "const [rbegin() & rend()] |";
-			// {
-			// 	ft::vector<int>::reverse_iterator it;
-			// 	ft::vector<int>::reverse_iterator i;
+			std::cout << "const [rbegin() & rend()] |";
+			{
+				ft::vector<int>::reverse_iterator it;
+				ft::vector<int>::reverse_iterator i;
 
-			// 	i = vec1.rbegin();
-			// 	cont = 0;
-			// 	for (it = vec1.rbegin(); it < vec1.rend(); it++)
-			// 		cont += (*it == array[10 - (it - i + 1)]? 1: 0);
-			// 	std::cout << (cont == 10 ?"✅":"❌");
+				i = vec1.rbegin();
+				cont = 0;
+				for (it = vec1.rbegin(); it < vec1.rend(); it++)
+					cont += (*it == array[10 - (it - i + 1)]? 1: 0);
+				std::cout << (cont == 10 ?"✅":"❌");
 
-			// 	i = vec2.rbegin();
-			// 	cont = 0;
-			// 	for (it = vec2.rbegin(); it < vec2.rend(); it++)
-			// 		cont += (*it == array[10 - (it - i + 1)]? 1: 0);
-			// 	std::cout << (cont == 5 ?"✅":"❌");
+				i = vec2.rbegin();
+				cont = 0;
+				for (it = vec2.rbegin(); it < vec2.rend(); it++)
+					cont += (*it == array[10 - (it - i + 1)]? 1: 0);
+				std::cout << (cont == 5 ?"✅":"❌");
 
-			// 	i = vec3.rbegin();
-			// 	cont = 0;
-			// 	for (it = vec3.rbegin(); it < vec3.rend(); it++)
-			// 		cont += (*it == ar[it - i]? 1: 0);
-			// 	std::cout << (cont == 10 ?"✅":"❌")<< std::endl;
-			// }
+				i = vec3.rbegin();
+				cont = 0;
+				for (it = vec3.rbegin(); it < vec3.rend(); it++)
+					cont += (*it == ar[it - i]? 1: 0);
+				std::cout << (cont == 10 ?"✅":"❌")<< std::endl;
+			}
 		}
 	}
 
@@ -768,7 +767,6 @@ int	main( void )
 		std::cout << (vec1 >= vec1 ?"✅":"❌");
 		std::cout << (vec1 >= vec2 ?"✅":"❌");
 		std::cout << (vec2 >= vec1 ?"✅":"❌") << std::endl;
-
 	}
 
 	return (0);

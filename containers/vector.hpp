@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 18:58:30 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/23 15:32:58 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:33:52 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,7 @@ namespace ft
 			// push_back
 			void	push_back( const value_type& val ) {
 				if (this->_size == this->_capacity)
-					this->reserve(this->_capacity * 2);
+					this->reserve(this->_size * 2);
 				this->_alloc.construct(this->_data + this->_size++, val);
 			};
 
