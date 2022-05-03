@@ -6,7 +6,7 @@
 #    By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 02:30:49 by mmoreira          #+#    #+#              #
-#    Updated: 2022/04/26 23:53:09 by mmoreira         ###   ########.fr        #
+#    Updated: 2022/05/03 18:45:05 by mmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ UTILITY		=	utility.cpp
 ALGORITHM	=	algorithm.cpp
 VECTOR		=	vector.cpp
 STACK		=	stack.cpp
+RBTREE		=	rb_tree.cpp
 
 OBJ_DIR			=	./builds
 OBJ				=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
@@ -30,6 +31,7 @@ UTILITY_OBJ		=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(UTILITY))
 ALGORITHM_OBJ	=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(ALGORITHM))
 VECTOR_OBJ		=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(VECTOR))
 STACK_OBJ		=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(STACK))
+RBTREE_OBJ		=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(RBTREE))
 
 INCD_DIR		=	-I ./ \
 					-I ./containers \
@@ -37,7 +39,7 @@ INCD_DIR		=	-I ./ \
 					-I ./others
 INCD			=	vector_iterator.hpp reverse_iterator.hpp \
 					type_traits.hpp algorithm.hpp vector.hpp \
-					stack.hpp
+					stack.hpp rb_tree.hpp
 #______________________________________//_______________________________________
 vpath %.cpp $(SRC_DIR)
 vpath %.hpp $(INCD_DIR)
@@ -52,11 +54,12 @@ TEST_UTILITY	=	utility
 TEST_ALGORITHM	=	algorithm
 TEST_VECTOR		=	vector
 TEST_STACK		=	stack
+TEST_RBTREE		=	rbtree
 
 ALL_TEST	= $(TEST_VEC_ITER) $(TEST_REV_ITER) \
 			$(TEST_TYPE_TRAITS) $(TEST_UTILITY) \
 			$(TEST_ALGORITHM) $(TEST_VECTOR) \
-			$(TEST_STACK)
+			$(TEST_STACK) $(TEST_RBTREE)
 
 CFLAGS	=	-Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
 
@@ -95,7 +98,7 @@ teste:			$(ALL_TEST)
 	@echo "************Utility************"
 	@./$(TEST_UTILITY)
 	@echo "*******************************"
-	@echo "***********algorithm***********"
+	@echo "***********Algorithm***********"
 	@./$(TEST_ALGORITHM)
 	@echo "*******************************"
 	@echo "*********Vector Testes*********"
@@ -103,6 +106,9 @@ teste:			$(ALL_TEST)
 	@echo "*******************************"
 	@echo "**********Stack Testes*********"
 	@./$(TEST_STACK)
+	@echo "*******************************"
+	@echo "*********RB_Tree Testes********"
+	@./$(TEST_RBTREE)
 	@echo "*******************************"
 
 $(TEST_VEC_ITER):	$(VEC_ITER_OBJ)
@@ -158,6 +164,14 @@ $(TEST_STACK):	$(STACK_OBJ)
 	@echo "\033[1;32m"
 	@echo "/ ************************************ \\"
 	@echo "|             $(TEST_STACK) Criado"
+	@echo "\\ ************************************ /"
+	@echo "\033[0m"
+
+$(TEST_RBTREE):	$(RBTREE_OBJ)
+	$(CC) $(CFLAGS) $(RBTREE_OBJ) $(INCD_DIR) -o $(TEST_RBTREE)
+	@echo "\033[1;32m"
+	@echo "/ ************************************ \\"
+	@echo "|             $(TEST_RBTREE) Criado"
 	@echo "\\ ************************************ /"
 	@echo "\033[0m"
 

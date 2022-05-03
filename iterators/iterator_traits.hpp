@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:20:54 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/23 06:06:22 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/03 17:05:25 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 namespace ft
 {
-	struct random_access_iterator_tag {};
+	struct bidirectional_iterator_tag {};
+	struct random_access_iterator_tag: public bidirectional_iterator_tag {};
 
 	template< class Iter >
 	struct iterator_traits
