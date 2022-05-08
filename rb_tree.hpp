@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 20:11:57 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/07 14:46:32 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/08 22:49:11 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ namespace ft
 					delete node->right;
 			};
 
-
 			t_node*	_minimum( t_node* node ) {
 				while (node->left != this->_null)
 					node = node->left;
@@ -111,10 +110,10 @@ namespace ft
 				nodeY->parent = nodeX->parent;
 				if (nodeX->parent == this->_null)
 					this->_root = nodeY;
-				else if (nodeX->parent->left == nodeX)
-					nodeX->parent->left = nodeY;
-				else
+				else if (nodeX->parent->right == nodeX)
 					nodeX->parent->right = nodeY;
+				else
+					nodeX->parent->left = nodeY;
 
 				nodeY->right = nodeX;
 				nodeX->parent = nodeY;
@@ -129,6 +128,7 @@ namespace ft
 					nodeU->parent->right = nodeV;
 				if (nodeV != this->_null)
 					nodeV->parent = nodeU->parent;
+				nodeV->parent = nodeU->parent;
 			};
 
 
@@ -201,89 +201,7 @@ namespace ft
 				this->_root->color = BLACK;
 			};
 
-			void	_eraseFix( t_node* nodeX , int i) {
-				t_node*	nodeW;
 
-				while (nodeX != this->_root && nodeX->color == BLACK)
-				{
-					if (i)
-						std::cout << "**** " << nodeX->value << " ****" << std::endl;
-					if (nodeX == nodeX->parent->left)
-					{
-						nodeW = nodeX->parent->right;
-						if (i)
-							std::cout << "**** " << nodeW->value << " ****" << std::endl;
-						if (nodeW->color == RED)
-						{
-							nodeW->color = BLACK;
-							nodeX->parent->color = RED;
-							this->_leftRotate(nodeX->parent);
-							nodeW = nodeX->parent->right;
-						}
-						if (nodeW->left->color == BLACK && nodeW->right->color == BLACK)
-						{
-
-							nodeW->color = RED;
-							nodeX = nodeX->parent;
-							if (i)
-							std::cout << "**** " << nodeX->value << " ****" << std::endl;
-							if (i)
-							std::cout << "**** " << (nodeW->color?"red":"black") << " ****" << std::endl;
-						}
-						else
-						{
-							if (nodeW->right->color == BLACK)
-							{
-								nodeW->left->color = BLACK;
-								nodeW->color = RED;
-								this->_rightRotate(nodeW);
-								nodeW = nodeX->parent->right;
-							}
-							nodeW->color = nodeX->parent->color;
-							nodeX->parent->color = BLACK;
-							nodeW->right->color = BLACK;
-							this->_leftRotate(nodeX->parent);
-							nodeX = this->_root;
-						}
-					}
-					else
-					{
-						nodeW = nodeX->parent->left;
-						// if (i)
-						// 	std::cout << "**** " << nodeW->value << " ****" << std::endl;
-						if (nodeW->color == RED)
-						{
-							nodeW->color = BLACK;
-							nodeX->parent->color = RED;
-							this->_rightRotate(nodeX->parent);
-							nodeW = nodeX->parent->left;
-							// if (i)
-							// std::cout << "**** " << nodeW->value << " ****" << std::endl;
-						}
-						if (nodeW->right->color == BLACK && nodeW->left->color == BLACK)
-						{
-							nodeW->color = RED;
-							nodeX = nodeX->parent;
-						}
-						else
-						{
-							if (nodeW->left->color == BLACK)
-							{
-								nodeW->right->color = BLACK;
-								nodeW->color = RED;
-								this->_leftRotate(nodeW);
-								nodeW = nodeX->parent->left;
-							}
-							nodeW->color = nodeX->parent->color;
-							nodeX->parent->color = BLACK;
-							nodeW->left->color = BLACK;
-							this->_rightRotate(nodeX->parent);
-							nodeX = this->_root;
-						}
-					}
-				}
-				nodeX->color = BLACK;
-			};
 
 		public:
 			void	insert( int value ) {
@@ -331,33 +249,99 @@ namespace ft
 				}
 				else
 				{
-					nodeY = this->_minimum(nodeZ->right);
+
+					nodeY = this->_maximum(nodeZ->left);
 					color = nodeY->color;
-					nodeX = nodeY->right;
-					if (nodeY != nodeZ->right)
+					nodeX = nodeY->left;
+					if (nodeY != nodeZ->left)
 					{
-						this->_transplant(nodeY, nodeY->right);
-						nodeY->right = nodeZ->right;
-						nodeY->right->parent = nodeY;
+						this->_transplant(nodeY, nodeY->left);
+						nodeY->left = nodeZ->left;
+						nodeY->left->parent = nodeY;
 					}
 					else
 						nodeX->parent = nodeY;
 					this->_transplant(nodeZ, nodeY);
-					nodeY->left = nodeZ->left;
-					nodeY->left->parent = nodeY;
+					nodeY->right = nodeZ->right;
+					nodeY->right->parent = nodeY;
 					nodeY->color = nodeZ->color;
 				}
 				delete nodeZ;
-				// if (color == BLACK)
-				// 	this->_eraseFix(nodeX);
 				if (color == BLACK)
-				{
-					if (value == 36)
-						this->_eraseFix(nodeX, 1);
-					else
-						this->_eraseFix(nodeX, 0);
-				}
+					this->_eraseFix(nodeX);
 			};
+
+			void	_eraseFix( t_node* nodeX ) {
+				t_node*	nodeW;
+
+				while (nodeX != this->_root && nodeX->color == BLACK)
+				{
+					if (nodeX == nodeX->parent->left)
+					{
+						nodeW = nodeX->parent->right;
+						if (nodeW->color == RED)
+						{
+							nodeW->color = BLACK;
+							nodeX->parent->color = RED;
+							this->_leftRotate(nodeX->parent);
+							nodeW = nodeX->parent->right;
+						}
+						if (nodeW->left->color == BLACK && nodeW->right->color == BLACK)
+						{
+							nodeW->color = RED;
+							nodeX = nodeX->parent;
+						}
+						else
+						{
+							if (nodeW->right->color == BLACK)
+							{
+								nodeW->left->color = BLACK;
+								nodeW->color = RED;
+								this->_rightRotate(nodeW);
+								nodeW = nodeX->parent->right;
+							}
+							nodeW->color = nodeX->parent->color;
+							nodeX->parent->color = BLACK;
+							nodeW->right->color = BLACK;
+							this->_leftRotate(nodeX->parent);
+							nodeX = this->_root;
+						}
+					}
+					else
+					{
+						nodeW = nodeX->parent->left;
+						if (nodeW->color == RED)
+						{
+							nodeW->color = BLACK;
+							nodeX->parent->color = RED;
+							this->_rightRotate(nodeX->parent);
+							nodeW = nodeX->parent->left;
+						}
+						if (nodeW->right->color == BLACK && nodeW->left->color == BLACK)
+						{
+							nodeW->color = RED;
+							nodeX = nodeX->parent;
+						}
+						else
+						{
+							if (nodeW->left->color == BLACK)
+							{
+								nodeW->right->color = BLACK;
+								nodeW->color = RED;
+								this->_leftRotate(nodeW);
+								nodeW = nodeX->parent->left;
+							}
+							nodeW->color = nodeX->parent->color;
+							nodeX->parent->color = BLACK;
+							nodeW->left->color = BLACK;
+							this->_rightRotate(nodeX->parent);
+							nodeX = this->_root;
+						}
+					}
+				}
+				nodeX->color = BLACK;
+			};
+
 
 			t_node*	_search( int value, t_node* node ) {
 				if (node == this->_null || node->value == value)
@@ -383,13 +367,11 @@ namespace ft
 						*checker = false;
 					if (node->color == BLACK)
 						blackNodes++;
-					// std::cout << node->value << " ->";
 					checkBranch(node->left, checker, blackNodes, blackTotal);
 					checkBranch(node->right, checker, blackNodes, blackTotal);
 				}
 				else
 				{
-					// std::cout << "---  " << blackNodes << "  ---" << std::endl;
 					(*blackTotal) += blackNodes;
 				}
 			}
@@ -404,7 +386,6 @@ namespace ft
 					return (true);
 				if (this->_root->color == RED)
 					return false;
-				// std::cout << std::endl;
 				this->checkBranch(this->_root, &checker, 0, &blackTotal);
 				while (node != this->_null)
 				{
