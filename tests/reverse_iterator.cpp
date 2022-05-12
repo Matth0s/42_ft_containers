@@ -6,20 +6,28 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:23:03 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/23 15:00:33 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/12 17:03:15 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#if 0
+	#include <vector>
+	typedef std::vector<int>::iterator	iterator;
+#else
+	#include "vector_iterator.hpp"
+	typedef ft::vector_iterator<int*> iterator;
+#endif
 
 #include "reverse_iterator.hpp"
 #include "vector_iterator.hpp"
 
 int	main( void )
 {
-	int	array1[] = {1,2,3,4,5,6,7,8,9,10};
-	ft::random_access_iterator<int*> it1(array1);
+	int			array1[] = {1,2,3,4,5,6,7,8,9,10};
+	iterator	it1(array1);
 
 	try {
-		ft::reverse_iterator<ft::random_access_iterator<int*> > rev_it;
+		ft::reverse_iterator<iterator> rev_it;
 		std::cout << "Default Constructor   |✅" << std::endl;
 	} catch(std::exception& ex)	{
 		std::cout << "Default Constructor   |❌" << std::endl;
@@ -27,7 +35,7 @@ int	main( void )
 	}
 
 	try {
-		ft::reverse_iterator<ft::random_access_iterator<int*> > rev_it(it1);
+		ft::reverse_iterator<iterator> rev_it(it1);
 		std::cout << "Iterator Constructor  |✅" << std::endl;
 	} catch(std::exception& ex) {
 		std::cout << "Iterator Constructor  |❌" << std::endl;
@@ -35,8 +43,8 @@ int	main( void )
 	}
 
 	try {
-		ft::reverse_iterator<ft::random_access_iterator<int*> > rev_it1(it1 + 1);
-		ft::reverse_iterator<ft::random_access_iterator<int*> > rev_it2(rev_it1);
+		ft::reverse_iterator<iterator> rev_it1(it1 + 1);
+		ft::reverse_iterator<iterator> rev_it2(rev_it1);
 		std::cout << "Copy Constructor      |✅" << std::endl;
 	} catch(std::exception& ex) {
 		std::cout << "Copy Constructor      |❌" << std::endl;
@@ -44,8 +52,8 @@ int	main( void )
 	}
 
 	try {
-		ft::reverse_iterator<ft::random_access_iterator<int*> > rev_it1(it1 + 1);
-		ft::reverse_iterator<ft::random_access_iterator<int*> > rev_it2;
+		ft::reverse_iterator<iterator> rev_it1(it1 + 1);
+		ft::reverse_iterator<iterator> rev_it2;
 		rev_it2 = rev_it1;
 		if (*rev_it1 == *rev_it2)
 			std::cout << "Assignment Operator   |✅" << std::endl;
@@ -54,9 +62,9 @@ int	main( void )
 		std::cout << ex.what() << std::endl;
 	}
 
-	ft::reverse_iterator<ft::random_access_iterator<int*> > rev_it1(it1 + 1);
-	ft::reverse_iterator<ft::random_access_iterator<int*> > rev_it2(it1 + 5);
-	ft::reverse_iterator<ft::random_access_iterator<int*> > rev_it3(it1 + 10);
+	ft::reverse_iterator<iterator> rev_it1(it1 + 1);
+	ft::reverse_iterator<iterator> rev_it2(it1 + 5);
+	ft::reverse_iterator<iterator> rev_it3(it1 + 10);
 
 	std::cout << "operator *   |";
 	try {

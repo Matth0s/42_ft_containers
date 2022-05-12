@@ -6,11 +6,20 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:35:48 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/23 15:00:38 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/12 17:09:41 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector_iterator.hpp"
+#if 0
+	#include <vector>
+	#include <iostream>
+	typedef std::vector<int>::iterator	iterator;
+#else
+
+	#include "vector_iterator.hpp"
+	typedef ft::vector_iterator<int*>	iterator;
+#endif
+
 
 int	main( void )
 {
@@ -18,7 +27,7 @@ int	main( void )
 	int	array2[] = {11,12,13,14,15,16,17,18,19,20};
 
 	try {
-		ft::random_access_iterator<int*> it3;
+		iterator it3;
 		std::cout << "Default Constructor  |✅" << std::endl;
 	} catch(std::exception& ex)	{
 		std::cout << "Default Constructor  |❌" << std::endl;
@@ -26,7 +35,7 @@ int	main( void )
 	}
 
 	try {
-		ft::random_access_iterator<int*> it1(array1);
+		iterator it1(array1);
 		std::cout << "Pointer Constructor  |✅" << std::endl;
 	} catch(std::exception& ex) {
 		std::cout << "Pointer Constructor  |❌" << std::endl;
@@ -34,8 +43,9 @@ int	main( void )
 	}
 
 	try {
-		ft::random_access_iterator<int*> it1(array1);
-		ft::random_access_iterator<int*> it2(it1);
+		iterator it1(array1);
+		iterator it2(it1);
+		(void) it2;
 		std::cout << "Copy Constructor     |✅" << std::endl;
 	} catch(std::exception& ex) {
 		std::cout << "Copy Constructor     |❌" << std::endl;
@@ -43,8 +53,8 @@ int	main( void )
 	}
 
 	try {
-		ft::random_access_iterator<int*> it1(array1);
-		ft::random_access_iterator<int*> it2;
+		iterator it1(array1);
+		iterator it2;
 		it2 = it1;
 		if (*it1 == *it2)
 			std::cout << "Assignment Operator  |✅" << std::endl;
@@ -53,9 +63,9 @@ int	main( void )
 		std::cout << ex.what() << std::endl;
 	}
 
-	ft::random_access_iterator<int*> it1(array1);
-	ft::random_access_iterator<int*> it2(array1);
-	ft::random_access_iterator<int*> it3(array2);
+	iterator it1(array1);
+	iterator it2(array1);
+	iterator it3(array2);
 
 	std::cout << "operator *   |";
 	try {

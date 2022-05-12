@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:23:50 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/26 22:34:28 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/09 19:38:10 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@ namespace ft
 	template <class Iterator>
 	class reverse_iterator
 	{
+		private:
+			typedef typename ft::iterator_traits<Iterator>	traits_type;
+
 		public:
-			typedef Iterator													iterator_type;
-			typedef typename ft::iterator_traits<Iterator>::iterator_category	iterator_category;
-			typedef typename ft::iterator_traits<Iterator>::value_type			value_type;
-			typedef typename ft::iterator_traits<Iterator>::difference_type		difference_type;
-			typedef typename ft::iterator_traits<Iterator>::pointer				pointer;
-			typedef typename ft::iterator_traits<Iterator>::reference			reference;
+			typedef Iterator								iterator_type;
+			typedef typename traits_type::iterator_category	iterator_category;
+			typedef typename traits_type::value_type		value_type;
+			typedef typename traits_type::difference_type	difference_type;
+			typedef typename traits_type::pointer			pointer;
+			typedef typename traits_type::reference			reference;
 
 		protected:
 			iterator_type	_it;
@@ -70,9 +73,7 @@ namespace ft
 			};
 
 			reverse_iterator  operator++( int ) {
-				reverse_iterator<Iterator> rev_it(*this);
-				this->_it--;
-				return (rev_it);
+				return (reverse_iterator(this->_it--));
 			};
 
 			reverse_iterator& operator+=( difference_type n ) {
@@ -90,9 +91,7 @@ namespace ft
 			};
 
 			reverse_iterator  operator--( int ) {
-				reverse_iterator<Iterator> rev_it(*this);
-				this->_it++;
-				return (rev_it);
+				return (reverse_iterator(this->_it++));
 			};
 
 			reverse_iterator& operator-=( difference_type n ) {

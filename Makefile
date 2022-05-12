@@ -6,7 +6,7 @@
 #    By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 02:30:49 by mmoreira          #+#    #+#              #
-#    Updated: 2022/05/08 22:58:13 by mmoreira         ###   ########.fr        #
+#    Updated: 2022/05/12 19:20:41 by mmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,12 @@ RBTREE_OBJ		=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(RBTREE))
 INCD_DIR		=	-I ./ \
 					-I ./containers \
 					-I ./iterators \
-					-I ./others
+					-I ./others \
+					-I ./rb_tree
 INCD			=	vector_iterator.hpp reverse_iterator.hpp \
 					type_traits.hpp algorithm.hpp vector.hpp \
-					stack.hpp rb_tree.hpp
+					stack.hpp rb_node.hpp rb_iterator.hpp \
+					rb_tree.hpp
 #______________________________________//_______________________________________
 vpath %.cpp $(SRC_DIR)
 vpath %.hpp $(INCD_DIR)
@@ -61,7 +63,7 @@ ALL_TEST	= $(TEST_VEC_ITER) $(TEST_REV_ITER) \
 			$(TEST_ALGORITHM) $(TEST_VECTOR) \
 			$(TEST_STACK) $(TEST_RBTREE)
 
-CFLAGS	=	-Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -std=c++98 -g3 #-fsanitize=address
 
 RM		=	rm -rf
 

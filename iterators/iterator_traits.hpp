@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:20:54 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/03 17:05:25 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:31:26 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ namespace ft
 	struct bidirectional_iterator_tag {};
 	struct random_access_iterator_tag: public bidirectional_iterator_tag {};
 
-	template< class Iter >
+	template <class Iter>
 	struct iterator_traits
 	{
 		typedef typename Iter::iterator_category	iterator_category;
@@ -30,7 +30,7 @@ namespace ft
 		typedef typename Iter::reference			reference;
 	};
 
-	template< typename T >
+	template <typename T>
 	struct iterator_traits< T* >
 	{
 		typedef ft::random_access_iterator_tag		iterator_category;
@@ -40,7 +40,7 @@ namespace ft
 		typedef T&									reference;
 	};
 
-	template< typename T >
+	template <typename T>
 	struct iterator_traits< const T* >
 	{
 		typedef ft::random_access_iterator_tag		iterator_category;

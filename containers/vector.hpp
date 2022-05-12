@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 18:58:30 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/28 15:33:52 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:22:25 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ namespace ft
 			typedef typename allocator_type::const_reference		const_reference;
 			typedef typename allocator_type::pointer				pointer;
 			typedef typename allocator_type::const_pointer			const_pointer;
-			typedef ft::random_access_iterator<pointer>				iterator;
-			typedef ft::random_access_iterator<const_pointer>		const_iterator;
+			typedef ft::vector_iterator<pointer>					iterator;
+			typedef ft::vector_iterator<const_pointer>				const_iterator;
 			typedef ft::reverse_iterator<iterator>					reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>			const_reverse_iterator;
 			typedef std::ptrdiff_t									difference_type;
@@ -269,7 +269,12 @@ namespace ft
 			// push_back
 			void	push_back( const value_type& val ) {
 				if (this->_size == this->_capacity)
-					this->reserve(this->_size * 2);
+				{
+					if (this->_size == 0)
+						this->reserve(1);
+					else
+						this->reserve(this->_size * 2);
+				}
 				this->_alloc.construct(this->_data + this->_size++, val);
 			};
 

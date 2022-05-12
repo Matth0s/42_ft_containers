@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 04:53:00 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/21 18:27:59 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/12 19:28:53 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,19 @@ int	main( void )
 
 	std::cout << std::endl;
 
-	ft::pair<int, std::string> pr1(5, "a");
+	ft::pair<int, std::string> pr1(5, "ab");
 	ft::pair<int, std::string> pr2(5, "a");
-	ft::pair<int, std::string> pr3(8, "a");
+	ft::pair<int, std::string> pr3(8, "ab");
 	ft::pair<int, std::string> pr4(8, "b");
 
 	std::cout << "operator ==  |";
 	std::cout << (pr1 == pr1 ?"✅":"❌");
-	std::cout << (pr1 == pr2 ?"✅":"❌");
+	std::cout << (pr1 == pr2 ?"❌":"✅");
 	std::cout << (pr2 == pr3 ?"❌":"✅") << std::endl;
 
 	std::cout << "operator !=  |";
 	std::cout << (pr1 != pr1 ?"❌":"✅");
-	std::cout << (pr1 != pr2 ?"❌":"✅");
+	std::cout << (pr1 != pr2 ?"✅":"❌");
 	std::cout << (pr2 != pr3 ?"✅":"❌") << std::endl;
 
 	std::cout << "operator <   |";
@@ -96,12 +96,12 @@ int	main( void )
 	std::cout << (pr2 < pr3 ?"✅":"❌") << std::endl;
 
 	std::cout << "operator <=  |";
-	std::cout << (pr1 <= pr2 ?"✅":"❌");
+	std::cout << (pr1 <= pr2 ?"❌":"✅");
 	std::cout << (pr3 <= pr2 ?"❌":"✅");
 	std::cout << (pr4 <= pr3 ?"❌":"✅") << std::endl;
 
 	std::cout << "operator >   |";
-	std::cout << (pr1 > pr2 ?"❌":"✅");
+	std::cout << (pr1 > pr2 ?"✅":"❌");
 	std::cout << (pr3 > pr2 ?"✅":"❌");
 	std::cout << (pr3 > pr4 ?"❌":"✅") << std::endl;
 

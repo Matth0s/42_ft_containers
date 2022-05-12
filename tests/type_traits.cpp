@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 23:39:49 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/21 18:48:11 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:59:37 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main( void )
 	std::cout << "unsigned long int                |" << (ft::is_integral<long int>::value? "✅": "❌") << std::endl;
 	std::cout << "unsigned long long int           |" << (ft::is_integral<long long int>::value? "✅": "❌") << std::endl;
 	std::cout << "std::string                      |" << (ft::is_integral<std::string>::value? "❌": "✅") << std::endl;
-	std::cout << "ft::random_access_iterator<int>  |" << (ft::is_integral<ft::random_access_iterator<int> >::value? "❌": "✅") << std::endl;
+	std::cout << "ft::vector_iterator<int>         |" << (ft::is_integral<ft::vector_iterator<int*> >::value? "❌": "✅") << std::endl;
 
 	return (0);
 }
