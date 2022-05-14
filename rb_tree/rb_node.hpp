@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:08:02 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/12 19:47:33 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/14 04:53:30 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ namespace ft
 
 		static base_ptr	prev( base_ptr nodeX, base_ptr null ) {
 			base_ptr	nodeY;
-
+	
+			if (nodeX == null)
+				return (base::max(null->parent, null));
 			if (nodeX->left != null)
 				return (base::max(nodeX->left, null));
 			else
@@ -63,6 +65,8 @@ namespace ft
 		static base_ptr	next( base_ptr nodeX, base_ptr null ) {
 			base_ptr	nodeY;
 
+			if (nodeX == null)
+				return (base::max(null->parent, null));
 			if (nodeX->right != null)
 				return (base::min(nodeX->right, null));
 			else

@@ -6,7 +6,7 @@
 #    By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 02:30:49 by mmoreira          #+#    #+#              #
-#    Updated: 2022/05/14 01:56:22 by mmoreira         ###   ########.fr        #
+#    Updated: 2022/05/14 04:36:40 by mmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ TEST_SRC	=	teste.cpp \
 				rb_map.cpp \
 				rb_set.cpp \
 				rb_map_iterator.cpp \
-				rb_set_iterator.cpp
+				rb_set_iterator.cpp \
+				rb_map_reverse_iterator.cpp \
+				rb_set_reverse_iterator.cpp \
 
 
 OBJ_DIR			=	./builds

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rb_set_iterator.cpp                                :+:      :+:    :+:   */
+/*   rb_set_reverse_iterator.cpp                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 19:57:59 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/14 04:50:18 by mmoreira         ###   ########.fr       */
+/*   Created: 2022/05/14 04:35:42 by mmoreira          #+#    #+#             */
+/*   Updated: 2022/05/14 04:50:46 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef	ft::rb_tree<int, int, identity<int>, less<int> >	setRbTree;
 typedef ft::rb_node<int>									setRbNode;
 typedef ft::vector<int>										setFtVec;
 typedef setRbTree::iterator									iterator;
+typedef setRbTree::reverse_iterator							reviterator;
 
 static int		randomInt( int max ) {
 	return (rand() % max * (rand() % 2? 1: -1));
@@ -56,7 +57,7 @@ static void	vectorSort( setFtVec& vec ) {
 	{
 		while (i < j)
 		{
-			if (vec[i] > vec[i + 1])
+			if (vec[i] < vec[i + 1])
 			{
 				temp = vec[i];
 				vec[i] = vec[i + 1];
@@ -69,7 +70,7 @@ static void	vectorSort( setFtVec& vec ) {
 	}
 }
 
-void	test_rb_set_iterator( void )
+void	test_rb_set_reverse_iterator( void )
 {
 	srand(18);
 	setRbTree	tree;
@@ -83,78 +84,80 @@ void	test_rb_set_iterator( void )
 	}
 	vectorSort(vec);
 
+	iterator	it1(tree.null(), tree.null());
 	{
-		iterator it;
+		reviterator revit;
 		std::cout << "Default Constructor  |✅" << std::endl;
 	}
 
 	{
-		iterator it1(setRbNode::min(tree.root(), tree.null()), tree.null());
+		reviterator	revit1(it1);
 		std::cout << "Node Constructor     |✅" << std::endl;
 	}
 
 	{
-		iterator it1(setRbNode::min(tree.root(), tree.null()), tree.null());
-		iterator it2(it1);
-		(void) it2;
+		reviterator	revit1(it1);
+		reviterator revit2(revit1);
+		(void) revit2;
 		std::cout << "Copy Constructor     |✅" << std::endl;
 	}
 
 	{
-		iterator it1(setRbNode::min(tree.root(), tree.null()), tree.null());
-		iterator it2;
-		it2 = it1;
-		if (*it1 == *it2)
+		reviterator	revit1(it1);
+		reviterator revit2;
+		revit2 = revit1;
+		if (*revit1 == *revit2)
 			std::cout << "Assignment Operator  |✅" << std::endl;
 	}
 
-	iterator it1(setRbNode::min(tree.root(), tree.null()), tree.null());
-	iterator it2(setRbNode::min(tree.root(), tree.null()), tree.null());
-	iterator it3(tree.root(), tree.null());
+	reviterator revit1(it1);
+	reviterator revit2(it1);
+	reviterator revit3(iterator(tree.root(), tree.null()));
 
 	std::cout << std::endl;
 
 	std::cout << "operator *   |";
 	{
-		std::cout << (*it1 == -18 ?"✅":"❌");
-		std::cout << (*it2 == -18 ?"✅":"❌");
-		std::cout << (*it3 == -2 ?"✅":"❌") << std::endl;
+		std::cout << (*revit1 == 19 ?"✅":"❌");
+		std::cout << (*revit2 == 19 ?"✅":"❌");
+		std::cout << (*revit3 == -3 ?"✅":"❌") << std::endl;
 	}
 
 	std::cout << "operator ==  |";
-	std::cout << (it1 == it1 ?"✅":"❌");
-	std::cout << (it1 == it2 ?"✅":"❌");
-	std::cout << (it1 == it3 ?"❌":"✅") << std::endl;
+	std::cout << (revit1 == revit1 ?"✅":"❌");
+	std::cout << (revit1 == revit2 ?"✅":"❌");
+	std::cout << (revit1 == revit3 ?"❌":"✅") << std::endl;
 
 	std::cout << "operator !=  |";
-	std::cout << (it1 != it1 ?"❌":"✅");
-	std::cout << (it1 != it2 ?"❌":"✅");
-	std::cout << (it1 != it3 ?"✅":"❌") << std::endl;
+	std::cout << (revit1 != revit1 ?"❌":"✅");
+	std::cout << (revit1 != revit2 ?"❌":"✅");
+	std::cout << (revit1 != revit3 ?"✅":"❌") << std::endl;
 
 	std::cout << "operator ++  |";
-	std::cout << (*++it1 == vec[1] ?"✅":"❌");
-	std::cout << (*it1++ == vec[1] ?"✅":"❌" );
-	std::cout << (*it1 == vec[2] ?"✅":"❌") << std::endl;
+	std::cout << (*++revit1 == vec[1] ?"✅":"❌");
+	std::cout << (*revit1++ == vec[1] ?"✅":"❌" );
+	std::cout << (*revit1 == vec[2] ?"✅":"❌") << std::endl;
 
 	std::cout << "operator --  |";
-	std::cout << (*--it1 == vec[1] ?"✅":"❌");
-	std::cout << (*it1-- == vec[1] ?"✅":"❌");
-	std::cout << (*it1 == vec[0] ?"✅":"❌") << std::endl;
+	std::cout << (*--revit1 == vec[1] ?"✅":"❌");
+	std::cout << (*revit1-- == vec[1] ?"✅":"❌");
+	std::cout << (*revit1 == vec[0] ?"✅":"❌") << std::endl;
 
 	std::cout << "operator ++  |";
 	for (int i = 0; i < size; i++)
 	{
-		std::cout << (*it1 == vec[i] ?"✅":"❌");
-		it1++;
+		std::cout << (*revit1 == vec[i] ?"✅":"❌");
+		revit1++;
 	}
 	std::cout << std::endl;
-	it1--;
+	revit1--;
 	std::cout << "operator --  |";
 	for (int i = size - 1; i > 0; i--)
 	{
-		std::cout << (*it1 == vec[i] ?"✅":"❌");
-		it1--;
+		std::cout << (*revit1 == vec[i] ?"✅":"❌");
+		revit1--;
 	}
-	std::cout << (*it1 == vec[0] ?"✅":"❌");
+	std::cout << (*revit1 == vec[0] ?"✅":"❌");
 	std::cout << std::endl;
 }
+

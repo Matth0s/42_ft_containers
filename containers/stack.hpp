@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 22:43:13 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/28 13:32:08 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/14 05:00:42 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,27 @@ namespace ft
 			};
 
 			bool	empty( void ) const {
-				return (_c.empty());
+				return (this->_c.empty());
 			};
 
 			size_type	size( void ) const {
-				return (_c.size());
+				return (this->_c.size());
 			};
 
 			reference	top( void ) {
-				return (_c.back());
+				return (this->_c.back());
 			};
 
 			const_reference	top( void ) const {
-				return (_c.back());
+				return (this->_c.back());
 			};
 
 			void	push( const value_type& val ) {
-				_c.push_back(val);
+				this->_c.push_back(val);
 			};
 
 			void	pop( void ) {
-				_c.pop_back();
+				this->_c.pop_back();
 			};
 
 			template <typename Tp, typename Cts>

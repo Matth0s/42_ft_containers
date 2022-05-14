@@ -70,36 +70,24 @@ namespace ft
 			};
 
 			rb_iterator&	operator++( void ) {
-				if (this->_ptr == this->_null)
-					this->_ptr = node_base::max(this->_null->parent, this->_null);
-				else
-					this->_ptr = node_base::next(this->_ptr, this->_null);
+				this->_ptr = node_base::next(this->_ptr, this->_null);
 				return (*this);
 			};
 
 			rb_iterator	operator++( int ) {
 				rb_iterator	temp(*this);
-				if (this->_ptr == this->_null)
-					this->_ptr = node_base::max(this->_null->parent, this->_null);
-				else
-					this->_ptr = node_base::next(this->_ptr, this->_null);
+				this->_ptr = node_base::next(this->_ptr, this->_null);
 				return (temp);
 			};
 
 			rb_iterator&	operator--( void ) {
-				if (this->_ptr == this->_null)
-					this->_ptr = node_base::max(this->_null->parent, this->_null);
-				else
-					this->_ptr = node_base::prev(this->_ptr, this->_null);
+				this->_ptr = node_base::prev(this->_ptr, this->_null);
 				return (*this);
 			};
 
 			rb_iterator	operator--( int ) {
 				rb_iterator	temp(*this);
-				if (this->_ptr == this->_null)
-					this->_ptr = node_base::max(this->_null->parent, this->_null);
-				else
-					this->_ptr = node_base::prev(this->_ptr, this->_null);
+				this->_ptr = node_base::prev(this->_ptr, this->_null);
 				return (temp);
 			};
 	};
