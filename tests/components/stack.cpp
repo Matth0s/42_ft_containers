@@ -6,12 +6,13 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 23:36:32 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/28 13:31:08 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/14 00:50:50 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#if 0
+#ifdef STD
 	#include <stack>
+	#include <iostream>
 	namespace ft = std;
 #else
 	#include "stack.hpp"
@@ -19,23 +20,17 @@
 
 #include <deque>
 #include <list>
-
-#include <iostream>
 #include <cstdlib>
 
-int	main ( void )
+void	test_stack( void )
 {
-	try {
+	{
 		ft::stack<int>						st1;
 		ft::stack<int, std::list<int> >		st2;
 		ft::stack<int, std::deque<int> >	st3;
 
 		std::cout << "Default Constructor   |✅" << std::endl;
-	} catch(std::exception& ex)	{
-		std::cout << "Default Constructor   |❌" << std::endl;
-		std::cout << ex.what() << std::endl;
 	}
-	return (0);
 
 	ft::stack<int>						st1;
 	ft::stack<int, std::list<int> >		st2;

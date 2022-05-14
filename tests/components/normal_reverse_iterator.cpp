@@ -1,65 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_iterator.cpp                               :+:      :+:    :+:   */
+/*   normal_reverse_iterator.cpp                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 18:23:03 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/12 17:03:15 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/14 00:24:33 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#if 0
+#ifdef STD
 	#include <vector>
 	typedef std::vector<int>::iterator	iterator;
 #else
-	#include "vector_iterator.hpp"
-	typedef ft::vector_iterator<int*> iterator;
+	#include "normal_iterator.hpp"
+	typedef ft::normal_iterator<int*> iterator;
 #endif
 
 #include "reverse_iterator.hpp"
-#include "vector_iterator.hpp"
 
-int	main( void )
+void	test_normal_reverse_iterator( void )
 {
 	int			array1[] = {1,2,3,4,5,6,7,8,9,10};
 	iterator	it1(array1);
 
-	try {
+	{
 		ft::reverse_iterator<iterator> rev_it;
 		std::cout << "Default Constructor   |✅" << std::endl;
-	} catch(std::exception& ex)	{
-		std::cout << "Default Constructor   |❌" << std::endl;
-		std::cout << ex.what() << std::endl;
 	}
 
-	try {
+	{
 		ft::reverse_iterator<iterator> rev_it(it1);
 		std::cout << "Iterator Constructor  |✅" << std::endl;
-	} catch(std::exception& ex) {
-		std::cout << "Iterator Constructor  |❌" << std::endl;
-		std::cout << ex.what() << std::endl;
 	}
 
-	try {
+	{
 		ft::reverse_iterator<iterator> rev_it1(it1 + 1);
 		ft::reverse_iterator<iterator> rev_it2(rev_it1);
 		std::cout << "Copy Constructor      |✅" << std::endl;
-	} catch(std::exception& ex) {
-		std::cout << "Copy Constructor      |❌" << std::endl;
-		std::cout << ex.what() << std::endl;
 	}
 
-	try {
+	{
 		ft::reverse_iterator<iterator> rev_it1(it1 + 1);
 		ft::reverse_iterator<iterator> rev_it2;
 		rev_it2 = rev_it1;
 		if (*rev_it1 == *rev_it2)
 			std::cout << "Assignment Operator   |✅" << std::endl;
-	} catch(std::exception& ex) {
-		std::cout << "Assignment Operator   |❌" << std::endl;
-		std::cout << ex.what() << std::endl;
 	}
 
 	ft::reverse_iterator<iterator> rev_it1(it1 + 1);
@@ -67,13 +54,10 @@ int	main( void )
 	ft::reverse_iterator<iterator> rev_it3(it1 + 10);
 
 	std::cout << "operator *   |";
-	try {
+	{
 		std::cout << (*rev_it1 == 1 ?"✅":"❌");
 		std::cout << (*rev_it2 == 5 ?"✅":"❌");
 		std::cout << (*rev_it3 == 10 ?"✅":"❌") << std::endl;
-	} catch(std::exception& ex) {
-		std::cout << "❌" << std::endl;
-		std::cout << ex.what() << std::endl;
 	}
 
 	std::cout << "operator + n |";
@@ -151,6 +135,4 @@ int	main( void )
 	std::cout << (rev_it1 >= rev_it1 ?"✅":"❌");
 	std::cout << (rev_it1 >= rev_it2 ?"✅":"❌");
 	std::cout << (rev_it2 >= rev_it1 ?"❌":"✅") << std::endl;
-
-	return (0);
 }

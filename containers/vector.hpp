@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 18:58:30 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/12 15:22:25 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/13 23:55:25 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <memory>
 #include <exception>
-#include "vector_iterator.hpp"
+#include "normal_iterator.hpp"
 #include "reverse_iterator.hpp"
 #include "type_traits.hpp"
 #include "algorithm.hpp"
@@ -32,8 +32,8 @@ namespace ft
 			typedef typename allocator_type::const_reference		const_reference;
 			typedef typename allocator_type::pointer				pointer;
 			typedef typename allocator_type::const_pointer			const_pointer;
-			typedef ft::vector_iterator<pointer>					iterator;
-			typedef ft::vector_iterator<const_pointer>				const_iterator;
+			typedef ft::normal_iterator<pointer>					iterator;
+			typedef ft::normal_iterator<const_pointer>				const_iterator;
 			typedef ft::reverse_iterator<iterator>					reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>			const_reverse_iterator;
 			typedef std::ptrdiff_t									difference_type;

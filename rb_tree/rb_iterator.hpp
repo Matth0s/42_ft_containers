@@ -22,16 +22,16 @@ namespace ft
 	class rb_iterator
 	{
 		private:
-			typedef typename ft::rb_node<T>						node_base;
-			typedef typename ft::iterator_traits<node_base*>	traits_type;
+			typedef typename ft::rb_node<T>					node_base;
+			typedef typename ft::iterator_traits<T*>		traits_type;
 
 		public:
-			typedef node_base*									iterator_type;
-			typedef ft::bidirectional_iterator_tag				iterator_category;
-			typedef typename traits_type::value_type			value_type;
-			typedef typename traits_type::difference_type		difference_type;
-			typedef typename traits_type::pointer				pointer;
-			typedef typename traits_type::reference				reference;
+			typedef node_base*								iterator_type;
+			typedef ft::bidirectional_iterator_tag			iterator_category;
+			typedef typename traits_type::value_type		value_type;
+			typedef typename traits_type::difference_type	difference_type;
+			typedef typename traits_type::pointer			pointer;
+			typedef typename traits_type::reference			reference;
 
 		protected:
 			iterator_type	_ptr;
@@ -40,7 +40,7 @@ namespace ft
 		public:
 			rb_iterator( void ): _ptr(NULL), _null(NULL) {};
 			explicit rb_iterator( const iterator_type& ptr,
-									const iterator_type& null )
+									const iterator_type& null)
 			: _ptr(ptr), _null(null) {};
 			rb_iterator( const rb_iterator& src )
 			: _ptr(src.base()), _null(src.baseNull()) {};
@@ -70,24 +70,36 @@ namespace ft
 			};
 
 			rb_iterator&	operator++( void ) {
-				this->_ptr = node_base::next(this->_ptr, this->_null);
+				if (this->_ptr == this->_null)
+					this->_ptr = node_base::max(this->_null->parent, this->_null);
+				else
+					this->_ptr = node_base::next(this->_ptr, this->_null);
 				return (*this);
 			};
 
 			rb_iterator	operator++( int ) {
 				rb_iterator	temp(*this);
-				this->_ptr = node_base::next(this->_ptr, this->_null);
+				if (this->_ptr == this->_null)
+					this->_ptr = node_base::max(this->_null->parent, this->_null);
+				else
+					this->_ptr = node_base::next(this->_ptr, this->_null);
 				return (temp);
 			};
 
 			rb_iterator&	operator--( void ) {
-				this->_ptr = node_base::prev(this->_ptr, this->_null);
+				if (this->_ptr == this->_null)
+					this->_ptr = node_base::max(this->_null->parent, this->_null);
+				else
+					this->_ptr = node_base::prev(this->_ptr, this->_null);
 				return (*this);
 			};
 
 			rb_iterator	operator--( int ) {
 				rb_iterator	temp(*this);
-				this->_ptr = node_base::prev(this->_ptr, this->_null);
+				if (this->_ptr == this->_null)
+					this->_ptr = node_base::max(this->_null->parent, this->_null);
+				else
+					this->_ptr = node_base::prev(this->_ptr, this->_null);
 				return (temp);
 			};
 	};

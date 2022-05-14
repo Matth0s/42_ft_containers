@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 20:11:57 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/12 16:39:20 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/13 22:50:35 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ namespace ft
 				this->_null = this->_node_alloc.allocate(1);
 				this->_node_alloc.construct(this->_null,
 										node_base(value_type(), NULL, BLACK));
-				this->_null->parent = this->_null;
 				this->_null->left = this->_null;
 				this->_null->right = this->_null;
 				this->_root = this->_null;
+				this->_null->parent = this->_root;
 			};
 
 			~rb_tree( void ) {
@@ -209,6 +209,7 @@ namespace ft
 					}
 				}
 				this->_root->color = BLACK;
+				this->_null->parent = this->_root;
 			};
 
 			void	_eraseFix( base_ptr nodeX ) {
@@ -349,6 +350,7 @@ namespace ft
 				this->_deleteNode(nodeZ);
 				if (color == BLACK)
 					this->_eraseFix(nodeX);
+				this->_null->parent = this->_root;
 			};
 
 			base_ptr	search( key_type key ) {
@@ -362,6 +364,80 @@ namespace ft
 			base_ptr	null( void ) {
 				return (this->_null);
 			};
+	};
+
+	template <class KeyOfValue, class Node>
+	void	printRbTree( Node node, Node null, int level) {
+		if (node != null)
+		{
+			printRbTree<KeyOfValue, Node>(node->left, null, level + 1);
+			if (node->left != null) std::cout << "  <";
+
+			if (node->color == RED) std::cout << "\033[31m";
+			std::cout << "({" << level << "} " << KeyOfValue()(node->data) << ")";
+			std::cout << "\033[0m";
+
+			if (node->right != null) std::cout << ">  ";
+			printRbTree<KeyOfValue, Node>(node->right, null, level + 1);
+		}
+	};
+
+	template <class Node>
+	void	checkDoubleRed( Node node, Node null,	bool& doubleRed ) {
+		if (node != null)
+		{
+			if (node->color == RED && node->parent->color == RED)
+				doubleRed = true;
+			checkDoubleRed(node->left, null, doubleRed);
+			checkDoubleRed(node->right, null, doubleRed);
+		}
+	};
+
+	template <class Node>
+	void	checkBlackNodes( Node node, Node null, int* nullNodes,
+								int branchBlackNodes, int* totalBlackNodes ) {
+		if (node != null)
+		{
+			if (node->color == BLACK)
+				branchBlackNodes++;
+			checkBlackNodes(node->left, null, nullNodes,
+							branchBlackNodes, totalBlackNodes);
+			checkBlackNodes(node->right, null, nullNodes,
+							branchBlackNodes, totalBlackNodes);
+		}
+		else
+		{
+			(*totalBlackNodes) += branchBlackNodes;
+			(*nullNodes)++;
+		}
+	};
+
+	template <class Node>
+	bool	checkRbTree( Node root, Node null ) {
+		Node	node = NULL;
+		bool	doubleRed = false;
+		int		height = 0;
+		int		nullNodes = 0;
+		int		totalBlackNodes = 0;
+
+		if (root->color != BLACK)
+			return (false);
+
+		checkDoubleRed(root, null, doubleRed);
+		if (doubleRed)
+			return (false);
+
+		node = root;
+		while (node != null)
+		{
+			if (node->color == BLACK)
+				height++;
+			node = node->left;
+		}
+		checkBlackNodes(root, null, &nullNodes, 0, &totalBlackNodes);
+		if (totalBlackNodes / nullNodes != height)
+			return (false);
+		return (true);
 	};
 }
 

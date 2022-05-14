@@ -6,11 +6,11 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 04:53:49 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/21 21:44:18 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/14 00:40:07 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#if 0
+#ifdef STD
 	#include <algorithm>
 	namespace ft = std;
 #else
@@ -35,7 +35,7 @@ bool	preds( char& x, char& y ) {
 	return ( x == y);
 }
 
-int	main( void )
+void	test_algorithm( void )
 {
 	int			ar1[] = {1,2,3,4,5,6,7,8,9,10};
 	int			ar2[] = {1,2,3,4,5,16,17,18,19,20};
@@ -64,6 +64,4 @@ int	main( void )
 	std::cout << "lexicographical_compare  -teste 8   |" << (ft::lexicographical_compare(s2.begin() + 3, s2.begin() + 8, s3.begin(), s3.begin() + 5)?"✅": "❌") << std::endl;
 	std::cout << "lexicographical_compare  -teste 9   |" << (ft::lexicographical_compare(s2.begin(), s2.begin() + 5, s1.begin(), s1.begin() + 5, comps)?"❌": "✅") << std::endl;
 	std::cout << "lexicographical_compare  -teste 10  |" << (ft::lexicographical_compare(s3.begin(), s3.begin(), s1.begin(), s1.begin() + 1)?"✅": "❌") << std::endl;
-
-	return (0);
 }
