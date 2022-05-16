@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:08:02 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/14 04:53:30 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/16 18:21:47 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,23 @@ namespace ft
 
 		rb_node( T value , base_ptr null , bool color = RED )
 		:	data(value), parent(null), left(null), right(null), color(color) {};
+		rb_node( const rb_node& src ): data(src.data), color(src.color) {
+			this->parent = src.parent;
+			this->left = src.left;
+			this->right = src.right;
+		}
+
 		~rb_node( void ) {};
+
+		template <typename U>
+		rb_node&	operator=( const rb_node<U>& rhs ) {
+			this->data = rhs.data;
+			this->parent = rhs.parent;
+			this->left = rhs.left;
+			this->right = rhs.right;
+			this->color = rhs.color;
+			return (*this);
+		};
 
 		static base_ptr	min( base_ptr node, base_ptr null ) {
 			while (node->left != null)
@@ -45,7 +61,7 @@ namespace ft
 
 		static base_ptr	prev( base_ptr nodeX, base_ptr null ) {
 			base_ptr	nodeY;
-	
+
 			if (nodeX == null)
 				return (base::max(null->parent, null));
 			if (nodeX->left != null)

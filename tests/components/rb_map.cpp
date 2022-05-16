@@ -6,56 +6,22 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 20:19:41 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/14 01:04:56 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/14 21:41:37 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rb_tree.hpp"
+#include "functional.hpp"
 #include "utility.hpp"
 #include "vector.hpp"
 #include <cstdlib>
 
-template<class Arg, class Result>
-struct unary_function
-{
-	typedef Arg		argument_type;
-	typedef Result	result_type;
-};
-
-template <class Pair>
-struct select1st: public unary_function<Pair, typename Pair::first_type>
-{
-	typename Pair::first_type&	operator()( Pair& x ) const {
-		return x.first;
-	};
-
-	const typename Pair::first_type&	operator()( const Pair& x) const {
-		return x.first;
-	};
-};
-
-template <class Arg1, class Arg2, class Result>
-struct binary_function
-{
-	typedef Arg1	first_argument_type;
-	typedef Arg2	second_argument_type;
-	typedef Result	result_type;
-};
-
-template <class T>
-struct less: public binary_function<T, T, bool>
-{
-	bool	operator()(const T& x, const T& y) const {
-		return (x < y);
-	}
-};
-
-typedef	ft::pair<std::string, int>				mapPair;
+typedef	ft::pair<std::string, int>			mapPair;
 typedef	ft::rb_tree<std::string, mapPair,
-		select1st<mapPair>,
-		less<std::string> >						mapRbTree;
-typedef ft::rb_node<mapPair>					mapRbNode;
-typedef ft::vector<mapPair>						mapFtVec;
+		ft::select1st<mapPair>,
+		ft::less<std::string> >				mapRbTree;
+typedef ft::rb_node<mapPair>				mapRbNode;
+typedef ft::vector<mapPair>					mapFtVec;
 
 static std::string	randomString( int len ) {
 	std::string	str;
@@ -79,7 +45,6 @@ void	test_rb_map( void )
 			srand(7);
 			mapFtVec	vec;
 			mapRbTree	tree;
-			int			index;
 
 			std::cout << "   insert()           |";
 			for (int i = 0; i < size; i++)
@@ -87,14 +52,6 @@ void	test_rb_map( void )
 				vec.push_back(mapPair(randomString(1 + (rand()%10)),randomInt(453534)));
 				tree.insert(vec[i]);
 				std::cout << (ft::checkRbTree(tree.root(), tree.null())?"✅":"❌");
-			}
-			std::cout << std::endl;
-
-			std::cout << "   serach()           |";
-			for (int i = 0; i < size; i++)
-			{
-				index = rand() % size;
-				std::cout << (tree.search(vec[index].first)->data == vec[index]?"✅":"❌");
 			}
 			std::cout << std::endl;
 
@@ -212,18 +169,18 @@ void	test_rb_map( void )
 			std::cout << std::endl;
 		}
 
-		std::cout << std::endl;
+		// std::cout << std::endl;
 
-		std::cout << "   Print Tree" << std::endl;
-		{
-			srand(12);
-			int	lenght = 10;
-			mapRbTree	tree;
+		// std::cout << "   Print Tree" << std::endl;
+		// {
+		// 	srand(12);
+		// 	int	lenght = 10;
+		// 	mapRbTree	tree;
 
-			for (int i = 0; i < lenght; i++)
-				tree.insert(mapPair(randomString(1 + (rand()%10)),randomInt(964565)));
-			ft::printRbTree<select1st<mapPair>, mapRbNode*>(tree.root(), tree.null(), 0);
-			std::cout << std::endl;
-		}
+		// 	for (int i = 0; i < lenght; i++)
+		// 		tree.insert(mapPair(randomString(1 + (rand()%10)),randomInt(964565)));
+		// 	ft::printRbTree<select1st<mapPair>, mapRbNode*>(tree.root(), tree.null(), 0);
+		// 	std::cout << std::endl;
+		// }
 	}
 }

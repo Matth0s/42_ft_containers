@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 23:31:59 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/14 04:49:12 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:20:56 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,14 @@ int	main( int argc, char *argv[] )
 	{
 		std::cout << "**  RB Set Reverse Iterator Tests  **" << std::endl;
 		test_rb_set_reverse_iterator();
+		std::cout << "*************************************" << std::endl;
+		std::cout << std::endl << std::endl << std::endl;
+	}
+
+	if (str == "all" || str == "map")
+	{
+		std::cout << "************  Map Tests  ************" << std::endl;
+		test_map();
 		std::cout << "*************************************" << std::endl;
 		std::cout << std::endl << std::endl << std::endl;
 	}

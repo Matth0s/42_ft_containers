@@ -6,41 +6,21 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 20:05:17 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/14 01:05:39 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/14 21:41:27 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rb_tree.hpp"
+#include "functional.hpp"
 #include "vector.hpp"
 #include <cstdlib>
 
-template <class Arg1, class Arg2, class Result>
-struct binary_function
-{
-	typedef Arg1	first_argument_type;
-	typedef Arg2	second_argument_type;
-	typedef Result	result_type;
-};
-
-template <class T>
-struct less: public binary_function<T, T, bool>
-{
-	bool	operator()(const T& x, const T& y) const {
-		return (x < y);
-	}
-};
-
-template <typename T>
-struct identity
-{
-	T&	operator()(T& x) const { return (x); };
-	const T&	operator()(const T& x) const { return (x); };
-};
-
-typedef	ft::rb_tree<int, int, identity<int>, less<int> >	setRbTree;
-typedef ft::rb_node<int>									setRbNode;
-typedef ft::vector<int>										setFtVec;
-typedef setRbTree::iterator									iterator;
+typedef	ft::rb_tree<int, int,
+		ft::identity<int>,
+		ft::less<int> >			setRbTree;
+typedef ft::rb_node<int>		setRbNode;
+typedef ft::vector<int>			setFtVec;
+typedef setRbTree::iterator		iterator;
 
 static int		randomInt( int max ) {
 	return (rand() % max * (rand() % 2? 1: -1));
@@ -55,7 +35,6 @@ void	test_rb_set( void )
 		srand(1);
 		setFtVec	vec;
 		setRbTree	tree;
-		int		index;
 
 		std::cout << "   insert()           |";
 		for (int i = 0; i < size; i++)
@@ -63,14 +42,6 @@ void	test_rb_set( void )
 			vec.push_back(randomInt(34523));
 			tree.insert(vec[i]);
 			std::cout << (ft::checkRbTree(tree.root(), tree.null())?"✅":"❌");
-		}
-		std::cout << std::endl;
-
-		std::cout << "   serach()           |";
-		for (int i = 0; i < size; i++)
-		{
-			index = rand() % size;
-			std::cout << (tree.search(vec[index])->data == vec[index]?"✅":"❌");
 		}
 		std::cout << std::endl;
 
@@ -188,17 +159,17 @@ void	test_rb_set( void )
 		std::cout << std::endl;
 	}
 
-	std::cout << std::endl;
+	// std::cout << std::endl;
 
-	std::cout << "   Print Tree" << std::endl;
-	{
-		srand(6);
-		int	lenght = 10;
-		setRbTree	tree;
+	// std::cout << "   Print Tree" << std::endl;
+	// {
+	// 	srand(6);
+	// 	int	lenght = 10;
+	// 	setRbTree	tree;
 
-		for (int i = 0; i < lenght; i++)
-			tree.insert(randomInt(20));
-		ft::printRbTree<identity<int>, setRbNode*>(tree.root(), tree.null(), 0);
-		std::cout << std::endl;
-	}
+	// 	for (int i = 0; i < lenght; i++)
+	// 		tree.insert(randomInt(20));
+	// 	ft::printRbTree<identity<int>, setRbNode*>(tree.root(), tree.null(), 0);
+	// 	std::cout << std::endl;
+	// }
 }

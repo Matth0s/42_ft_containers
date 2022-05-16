@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 18:58:30 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/14 05:00:15 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/14 05:33:31 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,7 @@ namespace ft
 				return (*this);
 			};
 
-			/* Iterators: */
 
-			// begin
 			iterator	begin( void ) {
 				return (iterator(this->_data));
 			};
@@ -109,7 +107,6 @@ namespace ft
 				return (const_iterator(this->_data));
 			};
 
-			// end
 			iterator	end( void ) {
 				return (iterator(this->_data + this->_size));
 			};
@@ -118,7 +115,6 @@ namespace ft
 				return (const_iterator(this->_data + this->_size));
 			};
 
-			// rbegin
 			reverse_iterator	rbegin( void ) {
 				return (reverse_iterator(this->end()));
 			};
@@ -127,7 +123,6 @@ namespace ft
 				return (const_reverse_iterator(this->end()));
 			};
 
-			// rend
 			reverse_iterator	rend( void ) {
 				return (reverse_iterator(this->begin()));
 			};
@@ -137,19 +132,14 @@ namespace ft
 			};
 
 
-			/* Capacity: */
-
-			// size
 			size_type	size( void ) const {
 				return (this->_size);
 			};
 
-			// max_size
 			size_type	max_size( void ) const {
 				return (this->_alloc.max_size());
 			};
 
-			// resize
 			void	resize( size_type n, value_type val = value_type() ) {
 				if (this->_capacity < n)
 				{
@@ -167,17 +157,14 @@ namespace ft
 				this->_size = n;
 			};
 
-			// capacity
 			size_type	capacity( void ) const {
 				return (this->_capacity);
 			};
 
-			// empty
 			bool	empty( void ) const {
 				return (this->_size == 0);
 			};
 
-			// reserve
 			void reserve( size_type n ) {
 				if (this->_capacity < n)
 				{
@@ -192,9 +179,7 @@ namespace ft
 				}
 			};
 
-			/* Element access: */
 
-			// operator[]
 			reference	operator[]( size_type n ) {
 				return (*(this->_data + n));
 			};
@@ -203,7 +188,6 @@ namespace ft
 				return (*(this->_data + n));
 			};
 
-			// at
 			reference	at( size_type n ) {
 				if (n >= this->_size)
 					throw vector::_out_of_range();
@@ -216,7 +200,6 @@ namespace ft
 				return (*(this->_data + n));
 			};
 
-			// front
 			reference	front( void ) {
 				return (*this->_data);
 			};
@@ -225,7 +208,6 @@ namespace ft
 				return (*this->_data);
 			};
 
-			// back
 			reference	back( void ) {
 				return (*(this->_data + this->_size - 1));
 			};
@@ -234,7 +216,6 @@ namespace ft
 				return (*(this->_data + this->_size - 1));
 			};
 
-			// assign
 			void	assign( size_type n, const value_type& val ) {
 				if (this->_capacity < n)
 				{
@@ -266,7 +247,6 @@ namespace ft
 				}
 			};
 
-			// push_back
 			void	push_back( const value_type& val ) {
 				if (this->_size == this->_capacity)
 				{
@@ -278,12 +258,10 @@ namespace ft
 				this->_alloc.construct(this->_data + this->_size++, val);
 			};
 
-			// pop_back
 			void	pop_back( void ) {
 				this->_alloc.destroy(this->_data + --this->_size);
 			};
 
-			// insert
 			iterator	insert( iterator position, const value_type& val ) {
 				difference_type	diff = position - this->begin();
 				if (this->_size == this->_capacity)
@@ -313,8 +291,7 @@ namespace ft
 
 			template <class InputIterator>
 			void	insert( iterator position, typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type
-							 first,
-							 InputIterator last ) {
+							 first, InputIterator last ) {
 				difference_type	diff = position - this->begin();
 				size_type		n  = last - first;
 				if ((this->_size + n > this->_capacity)
@@ -330,7 +307,6 @@ namespace ft
 				this->_size += n;
 			};
 
-			// erase
 			iterator	erase( iterator position ) {
 				for (iterator it = position + 1; it < this->end(); it++)
 					this->_alloc.construct(&(*(it - 1)), *it);
@@ -346,7 +322,6 @@ namespace ft
 				return (first);
 			};
 
-			// swap
 			void	swap( vector& src ) {
 				size_type		size = this->_size;
 				size_type		capacity = this->_capacity;
@@ -364,27 +339,23 @@ namespace ft
 				src._data = data;
 			}
 
-			// clear
 			void	clear( void ) {
 				for (size_type i = 0; i < this->_size; i++)
 					this->_alloc.destroy(this->_data + i);
 				this->_size= 0;
 			};
 
-			// get_allocator
 			allocator_type get_allocator( void ) const {
 				return (allocator_type(this->_alloc));
 			};
 
 	};
 
-	// swap
 	template <class T, class Alloc>
 	void	swap( vector<T,Alloc>& lhs, vector<T,Alloc>& rhs ) {
 		lhs.swap(rhs);
 	};
 
-	// relational operators
 	template <class T, class Alloc>
 	bool	operator==( const vector<T,Alloc>& lhs,
 						const vector<T,Alloc>& rhs ) {

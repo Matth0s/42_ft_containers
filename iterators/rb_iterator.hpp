@@ -28,10 +28,10 @@ namespace ft
 		public:
 			typedef node_base*								iterator_type;
 			typedef ft::bidirectional_iterator_tag			iterator_category;
-			typedef typename traits_type::value_type		value_type;
-			typedef typename traits_type::difference_type	difference_type;
 			typedef typename traits_type::pointer			pointer;
 			typedef typename traits_type::reference			reference;
+			typedef typename traits_type::difference_type	difference_type;
+			typedef typename traits_type::value_type		value_type;
 
 		protected:
 			iterator_type	_ptr;
@@ -40,10 +40,10 @@ namespace ft
 		public:
 			rb_iterator( void ): _ptr(NULL), _null(NULL) {};
 			explicit rb_iterator( const iterator_type& ptr,
-									const iterator_type& null)
-			: _ptr(ptr), _null(null) {};
+									const iterator_type& null )
+			:	_ptr(ptr), _null(null) {};
 			rb_iterator( const rb_iterator& src )
-			: _ptr(src.base()), _null(src.baseNull()) {};
+			:	_ptr(src.base()), _null(src.baseNull()) {};
 			~rb_iterator( void ) {};
 
 			template <typename Iter>

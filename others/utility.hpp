@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 03:17:45 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/04/21 18:21:58 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/15 14:57:57 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,8 @@ namespace ft
 
 			pair&	operator=( const pair& rhs )
 			{
-				if (this != &rhs )
-				{
-					this->first = rhs.first;
-					this->second = rhs.second;
-				}
+				this->first = rhs.first;
+				this->second = rhs.second;
 				return (*this);
 			};
 	};

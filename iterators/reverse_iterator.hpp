@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:23:50 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/09 19:38:10 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:18:47 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ namespace ft
 
 			template <class Iter>
 			reverse_iterator&	operator=( const reverse_iterator<Iter>& rhs ) {
-				if (this != &rhs)
-					this->_it = rhs.base();
+				this->_it = rhs.base();
 				return (*this);
 			};
 

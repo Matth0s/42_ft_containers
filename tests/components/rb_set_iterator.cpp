@@ -6,51 +6,32 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 19:57:59 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/14 04:50:18 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:43:54 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rb_tree.hpp"
+#include "functional.hpp"
 #include "vector.hpp"
 #include <cstdlib>
 
-template <class Arg1, class Arg2, class Result>
-struct binary_function
-{
-	typedef Arg1	first_argument_type;
-	typedef Arg2	second_argument_type;
-	typedef Result	result_type;
-};
-
-template <class T>
-struct less: public binary_function<T, T, bool>
-{
-	bool	operator()(const T& x, const T& y) const {
-		return (x < y);
-	}
-};
-
-template <typename T>
-struct identity
-{
-	T&	operator()(T& x) const { return (x); };
-	const T&	operator()(const T& x) const { return (x); };
-};
-
-typedef	ft::rb_tree<int, int, identity<int>, less<int> >	setRbTree;
-typedef ft::rb_node<int>									setRbNode;
-typedef ft::vector<int>										setFtVec;
-typedef setRbTree::iterator									iterator;
+typedef	ft::rb_tree<int, int,
+		ft::identity<int>,
+		ft::less<int> >			setRbTree;
+typedef ft::rb_node<int>		setRbNode;
+typedef ft::vector<int>			setFtVec;
+typedef setRbTree::iterator		iterator;
 
 static int		randomInt( int max ) {
 	return (rand() % max * (rand() % 2? 1: -1));
 }
 
-static void	vectorSort( setFtVec& vec ) {
 
-	setFtVec::size_type	temp = 0;
-	setFtVec::size_type	i = 0;
-	setFtVec::size_type	j = vec.size() - 1;
+template <class Vec, typename T>
+static void	vectorSort( Vec& vec, T temp ) {
+
+	typename Vec::size_type	i = 0;
+	typename Vec::size_type	j = vec.size() - 1;
 
 	while (j > 0)
 	{
@@ -64,10 +45,27 @@ static void	vectorSort( setFtVec& vec ) {
 			}
 			i++;
 		}
-		i = 0;
-		j--;
+		i = 0; j--;
 	}
-}
+};
+
+template <class Vec, typename T>
+static void	vectorUnique( Vec& vec, T temp ) {
+
+	vectorSort(vec, temp);
+
+	typename Vec::iterator	it = vec.begin();
+
+	while (++it != vec.end())
+	{
+		if (*it == *(it - 1))
+		{
+			vec.erase(it);
+			it = vec.begin();
+		}
+	}
+};
+
 
 void	test_rb_set_iterator( void )
 {
@@ -81,7 +79,7 @@ void	test_rb_set_iterator( void )
 		vec.push_back(randomInt(20));
 		tree.insert(vec[i]);
 	}
-	vectorSort(vec);
+	vectorUnique(vec, int());
 
 	{
 		iterator it;
@@ -142,7 +140,7 @@ void	test_rb_set_iterator( void )
 	std::cout << (*it1 == vec[0] ?"✅":"❌") << std::endl;
 
 	std::cout << "operator ++  |";
-	for (int i = 0; i < size; i++)
+	for (setFtVec::size_type i = 0; i < vec.size(); i++)
 	{
 		std::cout << (*it1 == vec[i] ?"✅":"❌");
 		it1++;
@@ -150,7 +148,7 @@ void	test_rb_set_iterator( void )
 	std::cout << std::endl;
 	it1--;
 	std::cout << "operator --  |";
-	for (int i = size - 1; i > 0; i--)
+	for (setFtVec::size_type i = vec.size() - 1; i > 0; i--)
 	{
 		std::cout << (*it1 == vec[i] ?"✅":"❌");
 		it1--;

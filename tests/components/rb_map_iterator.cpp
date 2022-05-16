@@ -6,57 +6,23 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 06:08:28 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/14 01:07:55 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/15 16:41:16 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rb_tree.hpp"
 #include "utility.hpp"
 #include "vector.hpp"
+#include "functional.hpp"
 #include <cstdlib>
 
-template<class Arg, class Result>
-struct unary_function
-{
-	typedef Arg		argument_type;
-	typedef Result	result_type;
-};
-
-template <class Pair>
-struct select1st: public unary_function<Pair, typename Pair::first_type>
-{
-	typename Pair::first_type&	operator()( Pair& x ) const {
-		return x.first;
-	};
-
-	const typename Pair::first_type&	operator()( const Pair& x) const {
-		return x.first;
-	};
-};
-
-template <class Arg1, class Arg2, class Result>
-struct binary_function
-{
-	typedef Arg1	first_argument_type;
-	typedef Arg2	second_argument_type;
-	typedef Result	result_type;
-};
-
-template <class T>
-struct less: public binary_function<T, T, bool>
-{
-	bool	operator()(const T& x, const T& y) const {
-		return (x < y);
-	}
-};
-
-typedef	ft::pair<std::string, int>				mapPair;
+typedef	ft::pair<std::string, int>			mapPair;
 typedef	ft::rb_tree<std::string, mapPair,
-		select1st<mapPair>,
-		less<std::string> >						mapRbTree;
-typedef ft::rb_node<mapPair>					mapRbNode;
+		ft::select1st<mapPair>,
+		ft::less<std::string> >				mapRbTree;
+typedef ft::rb_node<mapPair>				mapRbNode;
 typedef ft::vector<mapPair>					mapFtVec;
-typedef mapRbTree::iterator						iterator;
+typedef mapRbTree::iterator					iterator;
 
 
 static std::string	randomString( int len ) {
@@ -71,11 +37,11 @@ static int		randomInt( int max ) {
 	return (rand() % max * (rand() % 2? 1: -1));
 }
 
-static void	vectorSort( mapFtVec& vec ) {
+template <class Vec, typename T>
+static void	vectorSort( Vec& vec, T temp ) {
 
-	mapPair			temp;
-	mapFtVec::size_type	i = 0;
-	mapFtVec::size_type	j = vec.size() - 1;
+	typename Vec::size_type	i = 0;
+	typename Vec::size_type	j = vec.size() - 1;
 
 	while (j > 0)
 	{
@@ -89,10 +55,27 @@ static void	vectorSort( mapFtVec& vec ) {
 			}
 			i++;
 		}
-		i = 0;
-		j--;
+		i = 0; j--;
 	}
-}
+};
+
+template <class Vec, typename T>
+static void	vectorUnique( Vec& vec, T temp ) {
+
+	vectorSort(vec, temp);
+
+	typename Vec::iterator	it = vec.begin();
+
+	while (++it != vec.end())
+	{
+		if (*it == *(it - 1))
+		{
+			vec.erase(it);
+			it = vec.begin();
+		}
+	}
+};
+
 
 void	test_rb_map_iterator( void )
 {
@@ -106,7 +89,7 @@ void	test_rb_map_iterator( void )
 		vec.push_back(mapPair(randomString(1 + (rand()%10)),randomInt(453534)));
 		tree.insert(vec[i]);
 	}
-	vectorSort(vec);
+	vectorUnique(vec, mapPair());
 
 	{
 		iterator it;
@@ -180,7 +163,7 @@ void	test_rb_map_iterator( void )
 	std::cout << (*it1 == vec[0] ?"✅":"❌") << std::endl;
 
 	std::cout << "operator ++  |";
-	for (int i = 0; i < size; i++)
+	for (mapFtVec::size_type i = 0; i < vec.size(); i++)
 	{
 		std::cout << (*it1 == vec[i] ?"✅":"❌");
 		it1++;
@@ -188,7 +171,7 @@ void	test_rb_map_iterator( void )
 	std::cout << std::endl;
 	it1--;
 	std::cout << "operator --  |";
-	for (int i = size - 1; i > 0; i--)
+	for (mapFtVec::size_type i = vec.size() - 1; i > 0; i--)
 	{
 		std::cout << (*it1 == vec[i] ?"✅":"❌");
 		it1--;
