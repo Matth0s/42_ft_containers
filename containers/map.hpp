@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:33:05 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/16 02:02:31 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/17 22:58:43 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ namespace ft
 			};
 
 			const_iterator	begin( void ) const {
-				return (this->_tree.cbegin());
+				return (this->_tree.begin());
 			};
 
 			iterator	end( void ) {
@@ -112,7 +112,7 @@ namespace ft
 			};
 
 			const_reverse_iterator	rbegin( void ) const {
-				return (this->_tree.rend());
+				return (this->_tree.rbegin());
 			};
 
 			reverse_iterator	rend( void ) {
@@ -145,13 +145,14 @@ namespace ft
 
 			pair<iterator, bool>	insert( const value_type& val ) {
 				key_type	key = ft::select1st<value_type>()(val);
+				bool		exist = this->_tree.count(key);
 				this->_tree.insert(val);
-				return (ft::make_pair<iterator, bool>(this->_tree.find(key), this->_tree.count(key)));
+				return (ft::make_pair<iterator, bool>(this->_tree.find(key), !(exist)));
 			};
 
 			iterator	insert( iterator position, const value_type& val ) {
 				(void) position;
-				return ((this->insert(val))->first);
+				return ((this->insert(val)).first);
 			};
 
 			template <class InputIterator>
@@ -191,7 +192,7 @@ namespace ft
 			};
 
 			value_compare	value_comp( void ) const {
-				return (value_compare(this->key_comp));
+				return (value_compare(this->key_comp()));
 			};
 
 

@@ -22,16 +22,16 @@ namespace ft
 	class rb_iterator
 	{
 		private:
-			typedef typename ft::rb_node<T>					node_base;
-			typedef typename ft::iterator_traits<T*>		traits_type;
+			typedef typename ft::iterator_traits<T>			traits_type;
 
 		public:
-			typedef node_base*								iterator_type;
 			typedef ft::bidirectional_iterator_tag			iterator_category;
+			typedef typename traits_type::value_type		value_type;
+			typedef typename traits_type::difference_type	difference_type;
 			typedef typename traits_type::pointer			pointer;
 			typedef typename traits_type::reference			reference;
-			typedef typename traits_type::difference_type	difference_type;
-			typedef typename traits_type::value_type		value_type;
+			typedef typename ft::rb_node<value_type>		node_base;
+			typedef typename ft::rb_node<value_type>*		iterator_type;
 
 		protected:
 			iterator_type	_ptr;

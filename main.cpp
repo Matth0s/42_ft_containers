@@ -6,15 +6,14 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 03:18:05 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/14 01:34:28 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/18 14:28:36 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define STD 0
 #include <iostream>
 #include <string>
 #include <deque>
-#if STD //CREATE A REAL STL EXAMPLE
+#if 1 //CREATE A REAL STL EXAMPLE
 	#include <map>
 	#include <stack>
 	#include <vector>

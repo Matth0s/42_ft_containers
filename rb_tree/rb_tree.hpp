@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 20:11:57 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/16 18:04:09 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/18 16:29:24 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ namespace ft
 			typedef typename allocator_type::const_reference	const_reference;
 			typedef typename allocator_type::pointer			pointer;
 			typedef typename allocator_type::const_pointer		const_pointer;
-			typedef ft::rb_iterator<value_type>					iterator;
-			typedef ft::rb_iterator<const value_type>			const_iterator;
+			typedef ft::rb_iterator<value_type*>				iterator;
+			typedef ft::rb_iterator<const value_type*>			const_iterator;
 			typedef ft::reverse_iterator<iterator>				reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 			typedef std::ptrdiff_t 								difference_type;
@@ -171,7 +171,7 @@ namespace ft
 				nodeV->parent = nodeU->parent;
 			};
 
-			base_ptr	_search( key_type key, base_ptr node ) {
+			base_ptr	_search( key_type key, base_ptr node ) const {
 				if (node == this->_null
 					|| (!_comp(KeyOfValue()(node->data), key)
 						 && !_comp(key, KeyOfValue()(node->data))))
@@ -450,6 +450,8 @@ namespace ft
 				this->_clear(this->_root);
 				if (this->_root != this->_null)
 					this->_deleteNode(this->_root);
+				this->_count = 0;
+				this->_root = this->_null;
 			};
 
 
@@ -474,7 +476,7 @@ namespace ft
 			iterator	lower_bound( const key_type& key ) {
 				base_ptr	nodeMin;
 
-				nodeMin = node_base::min(this->root, this->_null);
+				nodeMin = node_base::min(this->_root, this->_null);
 				while (nodeMin != this->_null)
 				{
 					if (!_comp(KeyOfValue()(nodeMin->data), key))
@@ -487,7 +489,7 @@ namespace ft
 			const_iterator	lower_bound( const key_type& key ) const {
 				base_ptr	nodeMin;
 
-				nodeMin = node_base::min(this->root, this->_null);
+				nodeMin = node_base::min(this->_root, this->_null);
 				while (nodeMin != this->_null)
 				{
 					if (!_comp(KeyOfValue()(nodeMin->data), key))
@@ -500,20 +502,20 @@ namespace ft
 			iterator	upper_bound( const key_type& key ) {
 				base_ptr	nodeMin;
 
-				nodeMin = node_base::min(this->root, this->_null);
+				nodeMin = node_base::min(this->_root, this->_null);
 				while (nodeMin != this->_null)
 				{
 					if (_comp(key, KeyOfValue()(nodeMin->data)))
 						break;
 					nodeMin = node_base::next(nodeMin, this->_null);
 				}
-				return (const_iterator(nodeMin, this->_null));
+				return (iterator(nodeMin, this->_null));
 			};
 
 			const_iterator	upper_bound( const key_type& key ) const {
 				base_ptr	nodeMin;
 
-				nodeMin = node_base::min(this->root, this->_null);
+				nodeMin = node_base::min(this->_root, this->_null);
 				while (nodeMin != this->_null)
 				{
 					if (!_comp(key, KeyOfValue()(nodeMin->data)))
@@ -532,8 +534,8 @@ namespace ft
 			};
 
 
-			node_allocator_type	get_allocator( void ) const {
-				return (node_allocator_type(this->_node_alloc));
+			allocator_type	get_allocator( void ) const {
+				return (allocator_type(this->_node_alloc));
 			};
 	};
 

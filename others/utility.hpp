@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 03:17:45 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/15 14:57:57 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/18 16:34:47 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ namespace ft
 		public:
 			pair( void ): first(T1()), second(T2()) {};
 
+			pair( const first_type& a, const second_type& b): first(a), second(b) {};
+
 			template<class U, class V>
 			pair( const pair<U, V>& src ): first(src.first), second(src.second) {};
-
-			pair( const first_type& a, const second_type& b): first(a), second(b) {};
 
 			pair&	operator=( const pair& rhs )
 			{
