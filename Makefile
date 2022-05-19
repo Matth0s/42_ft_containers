@@ -6,7 +6,7 @@
 #    By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 02:30:49 by mmoreira          #+#    #+#              #
-#    Updated: 2022/05/18 18:02:31 by mmoreira         ###   ########.fr        #
+#    Updated: 2022/05/19 01:19:36 by mmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ TEST_SRC	=	teste.cpp \
 				rb_map_reverse_iterator.cpp \
 				rb_set_reverse_iterator.cpp \
 				map.cpp \
-				set.cpp \
+				set.cpp
 
 
 OBJ_DIR			=	./builds
@@ -45,7 +45,7 @@ INCD_DIR		=	-I ./ \
 INCD			=	normal_iterator.hpp reverse_iterator.hpp \
 					type_traits.hpp algorithm.hpp vector.hpp \
 					stack.hpp rb_node.hpp rb_iterator.hpp \
-					rb_tree.hpp functional.hpp map.hpp
+					rb_tree.hpp functional.hpp map.hpp set.hpp
 
 #______________________________________//_______________________________________
 vpath %.cpp $(SRC_DIR)

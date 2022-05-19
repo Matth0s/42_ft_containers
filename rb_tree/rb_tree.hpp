@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 20:11:57 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/18 16:29:24 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/19 01:02:41 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -530,7 +530,8 @@ namespace ft
 			};
 
 			ft::pair<const_iterator,const_iterator>	equal_range( const key_type& key ) const {
-				return (ft::make_pair(this->lower_bound(key), this->upper_bound(key)));
+				return (
+					ft::make_pair(this->lower_bound(key), this->upper_bound(key)));
 			};
 
 

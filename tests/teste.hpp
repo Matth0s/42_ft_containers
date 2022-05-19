@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 23:34:28 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/15 13:27:18 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/19 02:43:17 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	test_rb_set_iterator( void );
 void	test_rb_map_reverse_iterator( void );
 void	test_rb_set_reverse_iterator( void );
 void	test_map( void );
+void	test_set( void );
 
 #endif

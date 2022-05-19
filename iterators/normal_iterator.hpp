@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_iterator.hpp                                :+:      :+:    :+:   */
+/*   normal_iterator.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 21:27:13 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/13 23:56:10 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/19 06:20:59 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ namespace ft
 		public:
 			normal_iterator( void ): _ptr(NULL) {};
 			explicit normal_iterator( const iterator_type& ptr ): _ptr(ptr) {};
-			normal_iterator( const normal_iterator& src ): _ptr(src.base()) {};
+			template <typename U>
+			normal_iterator( const normal_iterator<U>& src ): _ptr(src.base()) {};
 			~normal_iterator( void ) {};
 
 			template <typename Iter>

@@ -6,11 +6,9 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 12:42:18 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/18 17:04:05 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/19 01:18:26 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// # define STD 1
 
 #ifdef STD
 	#include <map>
@@ -893,59 +891,59 @@ void	test_map( void )
 						&& ft_equals(*p2.second, ft::make_pair("R",-8503))) ?"✅":"❌") << std::endl;
 	}
 
-	// std::cout << "const equal_range()  |" << std::endl;
+	std::cout << "const equal_range()  |";
 	{
-		// ft::pair<Map1::const_iterator, Map1::const_iterator> p1;
-		// ft::pair<Map2::const_iterator, Map2::const_iterator> p2;
+		ft::pair<Map1::const_iterator, Map1::const_iterator> p1;
+		ft::pair<Map2::const_iterator, Map2::const_iterator> p2;
 
-		// p1 = map12.equal_range(vec1[rand() % vec1.size()].first);
-		// std::cout << ((ft_equals(*p1.first, ft::make_pair(-5792, "mVlYNz"))
-		// 				&& ft_equals(*p1.second, ft::make_pair(-5715, "rHIFM"))) ?"✅":"❌");
-		// p1 = map12.equal_range(randomInt(5000));
-		// std::cout << ((ft_equals(*p1.first, ft::make_pair(2506, "i"))
-		// 				&& ft_equals(*p1.second, ft::make_pair(2506, "i"))) ?"✅":"❌");
-		// p1 = map12.equal_range(vec1[rand() % vec1.size()].first);
-		// std::cout << ((ft_equals(*p1.first, ft::make_pair(5786, "prrP"))
-		// 				&& ft_equals(*p1.second, ft::make_pair(7884, "HKn"))) ?"✅":"❌");
-		// p1 = map12.equal_range(randomInt(5000));
-		// std::cout << ((ft_equals(*p1.first, ft::make_pair(2506, "i"))
-		// 				&& ft_equals(*p1.second, ft::make_pair(2506, "i"))) ?"✅":"❌");
-		// p1 = map12.equal_range(vec1[rand() % vec1.size()].first);
-		// std::cout << ((ft_equals(*p1.first, ft::make_pair(-5715, "rHIFM"))
-		// 				&& ft_equals(*p1.second, ft::make_pair(-4724, "cyxbJJYHK"))) ?"✅":"❌");
-		// p1 = map12.equal_range(randomInt(5000));
-		// std::cout << ((ft_equals(*p1.first, ft::make_pair(5786, "prrP"))
-		// 				&& ft_equals(*p1.second, ft::make_pair(5786, "prrP"))) ?"✅":"❌");
-		// p1 = map12.equal_range(vec1[rand() % vec1.size()].first);
-		// std::cout << ((ft_equals(*p1.first, ft::make_pair(-5715, "rHIFM"))
-		// 				&& ft_equals(*p1.second, ft::make_pair(-4724, "cyxbJJYHK"))) ?"✅":"❌");
-		// p1 = map12.equal_range(randomInt(5000));
-		// std::cout << ((ft_equals(*p1.first, ft::make_pair(2506, "i"))
-		// 				&& ft_equals(*p1.second, ft::make_pair(2506, "i"))) ?"✅":"❌");
-		// p2 = map22.equal_range(vec2[rand() % vec2.size()].first);
-		// std::cout << ((ft_equals(*p2.first, ft::make_pair("lrFpkwQ", 3562))
-		// 				&& ft_equals(*p2.second, ft::make_pair("o", -3582))) ?"✅":"❌");
-		// p2 = map22.equal_range(randomString(10));
-		// std::cout << ((ft_equals(*p2.first, ft::make_pair("PaMsONNxIZ", -2431))
-		// 				&& ft_equals(*p2.second, ft::make_pair("PaMsONNxIZ",-2431))) ?"✅":"❌");
-		// p2 = map22.equal_range(vec2[rand() % vec2.size()].first);
-		// std::cout << ((ft_equals(*p2.first, ft::make_pair("DSVHYT", -4958))
-		// 				&& ft_equals(*p2.second, ft::make_pair("Exzhgbiu", 8075))) ?"✅":"❌");
-		// p2 = map22.equal_range(randomString(10));
-		// std::cout << ((ft_equals(*p2.first, ft::make_pair("o", -3582))
-		// 				&& ft_equals(*p2.second, ft::make_pair("o", -3582))) ?"✅":"❌");
-		// p2 = map22.equal_range(vec2[rand() % vec2.size()].first);
-		// std::cout << ((ft_equals(*p2.first, ft::make_pair("DSVHYT", -4958))
-		// 				&& ft_equals(*p2.second, ft::make_pair("Exzhgbiu", 8075))) ?"✅":"❌");
-		// p2 = map22.equal_range(randomString(10));
-		// std::cout << ((ft_equals(*p2.first, ft::make_pair("Exzhgbiu", 8075))
-		// 				&& ft_equals(*p2.second, ft::make_pair("Exzhgbiu",8075))) ?"✅":"❌");
-		// p2 = map22.equal_range(vec2[rand() % vec2.size()].first);
-		// std::cout << ((ft_equals(*p2.first, ft::make_pair("xueiuen", 165))
-		// 				&& ft_equals(*p2.second, ft::make_pair("yup", 1206))) ?"✅":"❌");
-		// p2 = map22.equal_range(randomString(10));
-		// std::cout << ((ft_equals(*p2.first, ft::make_pair("ZMBv", -2258))
-		// 				&& ft_equals(*p2.second, ft::make_pair("ZMBv",-2258))) ?"✅":"❌") << std::endl;
+		p1 = map12.equal_range(vec1[rand() % vec1.size()].first);
+		std::cout << ((ft_equals(*p1.first, ft::make_pair(-5792, "mVlYNz"))
+						&& ft_equals(*p1.second, ft::make_pair(-5715, "rHIFM"))) ?"✅":"❌");
+		p1 = map12.equal_range(randomInt(5000));
+		std::cout << ((ft_equals(*p1.first, ft::make_pair(2506, "i"))
+						&& ft_equals(*p1.second, ft::make_pair(2506, "i"))) ?"✅":"❌");
+		p1 = map12.equal_range(vec1[rand() % vec1.size()].first);
+		std::cout << ((ft_equals(*p1.first, ft::make_pair(5786, "prrP"))
+						&& ft_equals(*p1.second, ft::make_pair(7884, "HKn"))) ?"✅":"❌");
+		p1 = map12.equal_range(randomInt(5000));
+		std::cout << ((ft_equals(*p1.first, ft::make_pair(2506, "i"))
+						&& ft_equals(*p1.second, ft::make_pair(2506, "i"))) ?"✅":"❌");
+		p1 = map12.equal_range(vec1[rand() % vec1.size()].first);
+		std::cout << ((ft_equals(*p1.first, ft::make_pair(-5715, "rHIFM"))
+						&& ft_equals(*p1.second, ft::make_pair(-4724, "cyxbJJYHK"))) ?"✅":"❌");
+		p1 = map12.equal_range(randomInt(5000));
+		std::cout << ((ft_equals(*p1.first, ft::make_pair(5786, "prrP"))
+						&& ft_equals(*p1.second, ft::make_pair(5786, "prrP"))) ?"✅":"❌");
+		p1 = map12.equal_range(vec1[rand() % vec1.size()].first);
+		std::cout << ((ft_equals(*p1.first, ft::make_pair(-5715, "rHIFM"))
+						&& ft_equals(*p1.second, ft::make_pair(-4724, "cyxbJJYHK"))) ?"✅":"❌");
+		p1 = map12.equal_range(randomInt(5000));
+		std::cout << ((ft_equals(*p1.first, ft::make_pair(2506, "i"))
+						&& ft_equals(*p1.second, ft::make_pair(2506, "i"))) ?"✅":"❌");
+		p2 = map22.equal_range(vec2[rand() % vec2.size()].first);
+		std::cout << ((ft_equals(*p2.first, ft::make_pair("lrFpkwQ", 3562))
+						&& ft_equals(*p2.second, ft::make_pair("o", -3582))) ?"✅":"❌");
+		p2 = map22.equal_range(randomString(10));
+		std::cout << ((ft_equals(*p2.first, ft::make_pair("PaMsONNxIZ", -2431))
+						&& ft_equals(*p2.second, ft::make_pair("PaMsONNxIZ",-2431))) ?"✅":"❌");
+		p2 = map22.equal_range(vec2[rand() % vec2.size()].first);
+		std::cout << ((ft_equals(*p2.first, ft::make_pair("DSVHYT", -4958))
+						&& ft_equals(*p2.second, ft::make_pair("Exzhgbiu", 8075))) ?"✅":"❌");
+		p2 = map22.equal_range(randomString(10));
+		std::cout << ((ft_equals(*p2.first, ft::make_pair("o", -3582))
+						&& ft_equals(*p2.second, ft::make_pair("o", -3582))) ?"✅":"❌");
+		p2 = map22.equal_range(vec2[rand() % vec2.size()].first);
+		std::cout << ((ft_equals(*p2.first, ft::make_pair("DSVHYT", -4958))
+						&& ft_equals(*p2.second, ft::make_pair("Exzhgbiu", 8075))) ?"✅":"❌");
+		p2 = map22.equal_range(randomString(10));
+		std::cout << ((ft_equals(*p2.first, ft::make_pair("Exzhgbiu", 8075))
+						&& ft_equals(*p2.second, ft::make_pair("Exzhgbiu",8075))) ?"✅":"❌");
+		p2 = map22.equal_range(vec2[rand() % vec2.size()].first);
+		std::cout << ((ft_equals(*p2.first, ft::make_pair("xueiuen", 165))
+						&& ft_equals(*p2.second, ft::make_pair("yup", 1206))) ?"✅":"❌");
+		p2 = map22.equal_range(randomString(10));
+		std::cout << ((ft_equals(*p2.first, ft::make_pair("ZMBv", -2258))
+						&& ft_equals(*p2.second, ft::make_pair("ZMBv",-2258))) ?"✅":"❌") << std::endl;
 	}
 
 	std::cout << "key_comp()           |";

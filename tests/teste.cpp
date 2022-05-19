@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 23:31:59 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/17 23:52:27 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/19 01:20:17 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,14 @@ int	main( int argc, char *argv[] )
 	{
 		std::cout << "***************  Map Tests  ***************" << std::endl;
 		test_map();
+		std::cout << "*******************************************" << std::endl;
+		std::cout << std::endl << std::endl << std::endl;
+	}
+
+	if (str == "all" || str == "set")
+	{
+		std::cout << "***************  Set Tests  ***************" << std::endl;
+		test_set();
 		std::cout << "*******************************************" << std::endl;
 		std::cout << std::endl << std::endl << std::endl;
 	}

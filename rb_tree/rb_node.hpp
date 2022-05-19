@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:08:02 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/18 17:14:08 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/19 01:06:29 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ namespace ft
 			this->parent = src.parent;
 			this->left = src.left;
 			this->right = src.right;
-		}
+		};
 
 		~rb_node( void ) {};
 

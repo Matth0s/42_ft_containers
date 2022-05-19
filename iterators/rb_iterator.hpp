@@ -42,7 +42,8 @@ namespace ft
 			explicit rb_iterator( const iterator_type& ptr,
 									const iterator_type& null )
 			:	_ptr(ptr), _null(null) {};
-			rb_iterator( const rb_iterator& src )
+			template <typename U>
+			rb_iterator( const rb_iterator<U>& src )
 			:	_ptr(src.base()), _null(src.baseNull()) {};
 			~rb_iterator( void ) {};
 

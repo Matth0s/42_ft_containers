@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 17:23:50 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/15 16:18:47 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/19 01:15:58 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ namespace ft
 		public:
 			reverse_iterator( void ): _it() {};
 			explicit reverse_iterator( const iterator_type it ): _it(it) {};
-			reverse_iterator( const reverse_iterator& src ): _it(src.base()) {};
+			template <typename U>
+			reverse_iterator( const reverse_iterator<U>& src ): _it(src.base()) {};
 			~reverse_iterator( void ) {};
 
 			template <class Iter>
