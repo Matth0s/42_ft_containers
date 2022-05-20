@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 18:58:30 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/17 00:12:57 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/20 05:52:08 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,16 @@ namespace ft
 			};
 
 			~vector( void ) {
+				for (size_type i = 0; i < this->_size; i++)
+					this->_alloc.destroy(this->_data + i);
 				this->_alloc.deallocate(this->_data, this->_capacity);
 			};
 
 			vector&	operator=( const vector& rhs ) {
 				if (this != &rhs)
 				{
+					for (size_type i = 0; i < this->_size; i++)
+						this->_alloc.destroy(this->_data + i);
 					if (this->_capacity < rhs._size)
 						this->reserve(rhs._size);
 					for (size_type i = 0; i < rhs._size; i++)
@@ -97,7 +101,6 @@ namespace ft
 				}
 				return (*this);
 			};
-
 
 			iterator	begin( void ) {
 				return (iterator(this->_data));
@@ -131,7 +134,6 @@ namespace ft
 				return (const_reverse_iterator(this->begin()));
 			};
 
-
 			size_type	size( void ) const {
 				return (this->_size);
 			};
@@ -142,18 +144,11 @@ namespace ft
 
 			void	resize( size_type n, value_type val = value_type() ) {
 				if (this->_capacity < n)
-				{
 					this->reserve(n);
-					for (size_type i = this->_size; i < n; i++)
-						this->_alloc.construct(this->_data + i, val);
-				}
-				else
-				{
-					for (size_type i = this->_size; i < n; i++)
-						this->_alloc.construct(this->_data + i, val);
-					for (size_type i = n; i < this->_size; i++)
-						this->_alloc.destroy(this->_data + i);
-				}
+				for (size_type i = this->_size; i < n; i++)
+					this->_alloc.construct(this->_data + i, val);
+				for (size_type i = n; i < this->_size; i++)
+					this->_alloc.destroy(this->_data + i);
 				this->_size = n;
 			};
 
@@ -165,7 +160,7 @@ namespace ft
 				return (this->_size == 0);
 			};
 
-			void reserve( size_type n ) {
+			void	reserve( size_type n ) {
 				if (this->_capacity < n)
 				{
 					value_type*	data = this->_alloc.allocate(n);
@@ -178,7 +173,6 @@ namespace ft
 					this->_capacity = n;
 				}
 			};
-
 
 			reference	operator[]( size_type n ) {
 				return (*(this->_data + n));
@@ -219,14 +213,16 @@ namespace ft
 			void	assign( size_type n, const value_type& val ) {
 				if (this->_capacity < n)
 				{
-					ft::vector<value_type, allocator_type> temp(n, val, this->_alloc);
+					vector	temp(n, val, this->_alloc);
 					temp.swap(*this);
 				}
 				else
 				{
-					this->_size = n;
 					for (size_type i = 0; i < this->_size; i++)
+						this->_alloc.destroy(this->_data + i);
+					for (size_type i = 0; i < n; i++)
 						this->_alloc.construct(this->_data + i, val);
+					this->_size = n;
 				}
 			}
 
@@ -236,14 +232,16 @@ namespace ft
 				size_type	size = last - first;
 				if (this->_capacity < size)
 				{
-					ft::vector<value_type, allocator_type> temp(first, last, this->_alloc);
+					vector	temp(first, last, this->_alloc);
 					temp.swap(*this);
 				}
 				else
 				{
-					this->_size = size;
+					for (size_type i = 0; i < this->_size; i++)
+						this->_alloc.destroy(this->_data + i);
 					for (size_type i = 0; i < size; i++)
 						this->_alloc.construct(this->_data + i, *(first + i));
+					this->_size = size;
 				}
 			};
 
@@ -259,7 +257,8 @@ namespace ft
 			};
 
 			void	pop_back( void ) {
-				this->_alloc.destroy(this->_data + --this->_size);
+				if (this->_size)
+					this->_alloc.destroy(this->_data + --this->_size);
 			};
 
 			iterator	insert( iterator position, const value_type& val ) {
@@ -268,7 +267,10 @@ namespace ft
 					this->reserve(this->_capacity * 2);
 				position = this->begin() + diff;
 				for (iterator it = this->end(); it != position; it--)
+				{
 					this->_alloc.construct(&(*it), *(it - 1));
+					this->_alloc.destroy(&(*(it - 1)));
+				}
 				this->_alloc.construct(&(*(position)), val);
 				this->_size++;
 				return (position);
@@ -283,9 +285,12 @@ namespace ft
 					this->reserve(this->_size * 2);
 				position = this->begin() + diff;
 				for (iterator it = this->end(); it != position; it--)
+				{
 					this->_alloc.construct(&(*(it + n - 1)), *(it - 1));
-				for (iterator it = position; it != position + n; it++)
-					this->_alloc.construct(&(*it), val);
+					this->_alloc.destroy(&(*(it - 1)));
+				}
+				for (size_type i = 0; i < n; i++)
+					this->_alloc.construct(&(*(position + i)), val);
 				this->_size += n;
 			};
 
@@ -301,24 +306,35 @@ namespace ft
 					this->reserve(this->_size * 2);
 				position = this->begin() + diff;
 				for (iterator it = this->end(); it != position; it--)
+				{
 					this->_alloc.construct(&(*(it + n - 1)), *(it - 1));
-				for (iterator it = position; it != position + n; it++)
-					this->_alloc.construct(&(*it), *(first++));
+					this->_alloc.destroy(&(*(it - 1)));
+				}
+				for (size_type i = 0; i < n; i++)
+					this->_alloc.construct(&(*(position + i)), *(first++));
 				this->_size += n;
 			};
 
 			iterator	erase( iterator position ) {
-				for (iterator it = position + 1; it < this->end(); it++)
-					this->_alloc.construct(&(*(it - 1)), *it);
+				for (iterator it = position; it < this->end() - 1; it++)
+				{
+					this->_alloc.destroy(&(*it));
+					this->_alloc.construct(&(*it), *(it + 1));
+				}
 				this->_alloc.destroy(this->_data + --this->_size);
 				return (position);
 			};
 
 			iterator	erase( iterator first, iterator last) {
-
-				for (iterator it = last; it < this->end(); it++)
-					this->_alloc.construct(&(*(first - last	+ it)), *it);
-				this->_size -= (last - first);
+				size_type	n = last - first;
+				for (iterator it = first; it < last; it++)
+					this->_alloc.destroy(&(*it));
+				for (iterator it = first; it + n < this->end(); it++)
+				{
+					this->_alloc.construct(&(*it), *(it + n));
+					this->_alloc.destroy(&(*(it + n)));
+				}
+				this->_size -= n;
 				return (first);
 			};
 
@@ -348,7 +364,6 @@ namespace ft
 			allocator_type get_allocator( void ) const {
 				return (allocator_type(this->_alloc));
 			};
-
 	};
 
 	template <class T, class Alloc>

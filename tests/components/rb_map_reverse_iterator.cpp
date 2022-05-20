@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 02:42:19 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/15 16:43:01 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/20 06:01:49 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static std::string	randomString( int len ) {
 static int		randomInt( int max ) {
 	return (rand() % max * (rand() % 2? 1: -1));
 }
-
 
 template <class Vec, typename T>
 static void	vectorSort( Vec& vec, T temp ) {

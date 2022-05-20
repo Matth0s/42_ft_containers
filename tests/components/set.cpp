@@ -6,16 +6,14 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 01:18:38 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/19 06:17:50 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/20 06:03:07 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define STD 1
-
 #ifdef STD
 	#include <set>
-	#include <iostream>
 	#include <vector>
+	#include <iostream>
 	namespace ft = std;
 #else
 	#include "vector.hpp"
@@ -24,10 +22,10 @@
 
 #include <cstdlib>
 
-typedef ft::set<int>				Set1;
-typedef ft::vector<int>				Vec1;
-typedef ft::set<std::string>		Set2;
-typedef ft::vector<std::string>		Vec2;
+typedef ft::set<int>			Set1;
+typedef ft::vector<int>			Vec1;
+typedef ft::set<std::string>	Set2;
+typedef ft::vector<std::string>	Vec2;
 
 static std::string	randomString( int len ) {
 	std::string	str;
@@ -400,7 +398,6 @@ void	test_set( void )
 		seti.insert(vec3.begin(), vec3.end());
 		std::cout << (seti.size() == 40?"✅":"❌");
 		std::cout << (compare(seti, vec3)?"✅":"❌");
-
 		sets.insert(vec4.begin(), vec4.begin() + 5);
 		std::cout << (sets.size() == 24?"✅":"❌");
 		sets.insert(vec4.begin() + 7, vec4.begin() + 15);

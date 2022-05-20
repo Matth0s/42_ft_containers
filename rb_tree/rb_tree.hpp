@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 20:11:57 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/19 01:02:41 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/20 05:59:53 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -390,7 +390,6 @@ namespace ft
 				this->_count--;
 			};
 
-
 			base_ptr	root( void ) const {
 				return (this->_root);
 			};
@@ -398,7 +397,6 @@ namespace ft
 			base_ptr	null( void ) const {
 				return (this->_null);
 			};
-
 
 			iterator	begin( void ) {
 				return (iterator(node_base::min(this->_root, this->_null), this->_null));
@@ -432,7 +430,6 @@ namespace ft
 				return (const_reverse_iterator(this->begin()));
 			};
 
-
 			bool	empty( void ) const {
 				return (this->_count == 0);
 			};
@@ -445,7 +442,6 @@ namespace ft
 				return (this->_node_alloc.max_size());
 			};
 
-
 			void	clear( void ) {
 				this->_clear(this->_root);
 				if (this->_root != this->_null)
@@ -454,11 +450,9 @@ namespace ft
 				this->_root = this->_null;
 			};
 
-
 			key_compare	key_comp( void ) const {
 				return (this->_comp);
 			};
-
 
 			iterator	find( const key_type& key ) {
 				return (iterator(this->_search(key, this->_root), this->_null));
@@ -471,7 +465,6 @@ namespace ft
 			size_type	count( const key_type& key ) const {
 				return (this->find(key) != this->end());
 			};
-
 
 			iterator	lower_bound( const key_type& key ) {
 				base_ptr	nodeMin;
@@ -533,7 +526,6 @@ namespace ft
 				return (
 					ft::make_pair(this->lower_bound(key), this->upper_bound(key)));
 			};
-
 
 			allocator_type	get_allocator( void ) const {
 				return (allocator_type(this->_node_alloc));

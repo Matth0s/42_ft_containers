@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 19:57:59 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/15 16:43:54 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/20 06:02:31 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef setRbTree::iterator		iterator;
 static int		randomInt( int max ) {
 	return (rand() % max * (rand() % 2? 1: -1));
 }
-
 
 template <class Vec, typename T>
 static void	vectorSort( Vec& vec, T temp ) {
@@ -65,7 +64,6 @@ static void	vectorUnique( Vec& vec, T temp ) {
 		}
 	}
 };
-
 
 void	test_rb_set_iterator( void )
 {

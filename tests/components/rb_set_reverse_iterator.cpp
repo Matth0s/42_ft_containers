@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 04:35:42 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/15 16:35:55 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/20 06:02:43 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static void	vectorUnique( Vec& vec, T temp ) {
 		}
 	}
 };
-
 
 void	test_rb_set_reverse_iterator( void )
 {

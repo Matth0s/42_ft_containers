@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:33:05 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/17 22:58:43 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/20 05:55:39 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ namespace ft
 			typedef typename Alloc::template rebind<value_type>::other
 				pair_alloc_type;
 			typedef ft::rb_tree<key_type, value_type, ft::select1st<value_type>,
-				key_compare, allocator_type>	tree_type;
+				key_compare, pair_alloc_type>	tree_type;
 
 		public:
 			typedef typename pair_alloc_type::pointer			pointer;
@@ -67,15 +67,14 @@ namespace ft
 			tree_type	_tree;
 
 		public:
-			//construtores
 			explicit	map( const key_compare& comp = key_compare(),
-			const allocator_type& alloc = allocator_type() )
+							const allocator_type& alloc = allocator_type() )
 			: _tree(comp, alloc) {};
 
 			template <class InputIterator>
 			map( InputIterator first, InputIterator last,
-			const key_compare& comp = key_compare(),
-			const allocator_type& alloc = allocator_type())
+					const key_compare& comp = key_compare(),
+					const allocator_type& alloc = allocator_type())
 			: _tree(comp, alloc) {
 				while (first != last)
 					this->_tree.insert(*first++);
@@ -123,7 +122,6 @@ namespace ft
 				return (this->_tree.rend());
 			};
 
-
 			bool	empty( void ) const {
 				return (this->_tree.empty());
 			};
@@ -136,12 +134,10 @@ namespace ft
 				return (this->_tree.max_size());
 			};
 
-
 			mapped_type&	operator[]( const key_type& key ) {
 				this->_tree.insert(ft::make_pair(key, mapped_type()));
-				return ((*(this->_tree.find(key))).second);
+				return (ft::select2nd<value_type>()(*(this->_tree.find(key))));
 			};
-
 
 			pair<iterator, bool>	insert( const value_type& val ) {
 				key_type	key = ft::select1st<value_type>()(val);
@@ -167,7 +163,8 @@ namespace ft
 
 			size_type	erase( const key_type& key ) {
 				size_type	ret = this->_tree.count(key);
-				this->_tree.erase(*(this->_tree.find(key)));
+				if(ret)
+					this->_tree.erase(*(this->_tree.find(key)));
 				return (ret);
 			};
 
@@ -186,7 +183,6 @@ namespace ft
 				return (this->_tree.clear());
 			};
 
-
 			key_compare	key_comp( void ) const {
 				return (this->_tree.key_comp());
 			};
@@ -195,10 +191,10 @@ namespace ft
 				return (value_compare(this->key_comp()));
 			};
 
-
 			iterator	find( const key_type& key ) {
 				return (this->_tree.find(key));
 			};
+
 			const_iterator	find( const key_type& key ) const {
 				return (this->_tree.find(key));
 			};
@@ -230,7 +226,6 @@ namespace ft
 			pair<const_iterator, const_iterator>	equal_range( const key_type& key ) const {
 				return (this->_tree.equal_rande(key));
 			};
-
 
 			allocator_type	get_allocator( void ) const {
 				return (this->_tree.get_allocator());

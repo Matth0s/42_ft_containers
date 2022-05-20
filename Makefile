@@ -6,7 +6,7 @@
 #    By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 02:30:49 by mmoreira          #+#    #+#              #
-#    Updated: 2022/05/19 01:19:36 by mmoreira         ###   ########.fr        #
+#    Updated: 2022/05/20 06:09:39 by mmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ INCD			=	normal_iterator.hpp reverse_iterator.hpp \
 vpath %.cpp $(SRC_DIR)
 vpath %.hpp $(INCD_DIR)
 
-NAME			=	containers
+NAME			=	container
 TEST			=	test
 
 CFLAGS	=
@@ -92,7 +92,7 @@ clean:
 	@echo "\033[0m"
 
 fclean:		clean
-	$(RM) $(FT_NAME) $(STD_NAME) $(FT_TEST) $(STD_TEST)
+	$(RM) $(NAME) $(TEST)
 	@echo "\033[1;31m"
 	@echo "/ ************************************ \\"
 	@echo "|            exect Deletado            |"

@@ -6,10 +6,11 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 16:42:22 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/14 00:45:21 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/20 03:22:05 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// # define STD 1
 #ifdef STD
 	#include <vector>
 	#include <iostream>
@@ -428,7 +429,6 @@ void	test_vector( void )
 	std::cout << "pop_back()         |";
 	{
 		ft::vector<int>				vec4(vec3);
-		ft::vector<int>::size_type	size = 0;
 
 		vec4.pop_back();
 		vec4.pop_back();
@@ -437,9 +437,7 @@ void	test_vector( void )
 		vec4.pop_back();
 		std::cout << (((vec4.back() == 6) && (vec4.size() == 1))?"✅":"❌");
 		vec4.pop_back();
-		vec4.pop_back();
-		vec4.pop_back();
-		std::cout << ((vec4.size() == (size - 2))?"✅":"❌") << std::endl;
+		std::cout << ((vec4.size() == 0)?"✅":"❌") << std::endl;
 	}
 
 	std::cout << "single insert()    |";
