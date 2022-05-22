@@ -6,123 +6,137 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 03:18:05 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/20 06:05:35 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/22 06:56:35 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string>
-#include <deque>
-#if 1 //CREATE A REAL STL EXAMPLE
-	#include <map>
-	#include <stack>
+#include <sstream>
+#include <fstream>
+#include <ctime>
+
+#ifdef STD
 	#include <vector>
+	#include <stack>
+	#include <map>
+	#include <set>
 	namespace ft = std;
 #else
-	#include <map.hpp>
-	#include <stack.hpp>
-	#include <vector.hpp>
+	#include "vector.hpp"
+	#include "stack.hpp"
+	#include "map.hpp"
+	#include "set.hpp"
 #endif
 
 #include <stdlib.h>
 
-#define MAX_RAM 4294967296
-#define BUFFER_SIZE 4096
-struct Buffer
-{
-	int idx;
-	char buff[BUFFER_SIZE];
-};
+typedef ft::vector<std::string>				vectorStr;
+typedef ft::vector<int>						vectorInt;
+typedef ft::stack<int>						stackInt;
+typedef ft::stack<std::string>				stackStr;
+typedef ft::map<int, int>					mapInt;
+typedef ft::map<std::string, std::string>	mapStr;
+typedef ft::set<int>						setInt;
+typedef ft::set<std::string>				setStr;
 
-
-#define COUNT (MAX_RAM / (int)sizeof(Buffer))
-
-template<typename T>
-class MutantStack : public ft::stack<T>
-{
-public:
-	MutantStack() {}
-	MutantStack(const MutantStack<T>& src) { *this = src; }
-	MutantStack<T>& operator=(const MutantStack<T>& rhs)
-	{
-		this->c = rhs.c;
-		return *this;
-	}
-	~MutantStack() {}
-
-	typedef typename ft::stack<T>::container_type::iterator iterator;
-
-	iterator begin() { return this->c.begin(); }
-	iterator end() { return this->c.end(); }
-};
 
 int main(int argc, char** argv) {
-	if (argc != 2)
-	{
-		std::cerr << "Usage: ./test seed" << std::endl;
-		std::cerr << "Provide a seed please" << std::endl;
-		std::cerr << "Count value:" << COUNT << std::endl;
-		return 1;
-	}
-	const int seed = atoi(argv[1]);
-	srand(seed);
+	srand(argc);
 
-	ft::vector<std::string> vector_str;
-	ft::vector<int> vector_int;
-	ft::stack<int> stack_int;
-	ft::vector<Buffer> vector_buffer;
-	ft::stack<Buffer, std::deque<Buffer> > stack_deq_buffer;
-	ft::map<int, int> map_int;
+	std::ofstream	fileOut;
+	fileOut.open("log_time", std::ofstream::out | std::fstream::app);
+	clock_t	t = clock();
 
-	for (int i = 0; i < COUNT; i++)
+	std::stringstream	ss;
+	std::string			str;
+
 	{
-		vector_buffer.push_back(Buffer());
+		vectorInt	vector_int;
+
+		for (int i = 0; i < 10000; i++)
+			vector_int.insert(vector_int.begin(), i);
+		while (vector_int.size())
+			vector_int.erase(vector_int.begin() + rand() % vector_int.size());
 	}
 
-	for (int i = 0; i < COUNT; i++)
 	{
-		const int idx = rand() % COUNT;
-		vector_buffer[idx].idx = 5;
-	}
-	ft::vector<Buffer>().swap(vector_buffer);
+		vectorStr	vector_str;
 
-	try
-	{
-		for (int i = 0; i < COUNT; i++)
-		{
-			const int idx = rand() % COUNT;
-			vector_buffer.at(idx);
-			std::cerr << "Error: THIS VECTOR SHOULD BE EMPTY!!" <<std::endl;
+		for (int i = 0; i < 10000; i++) {
+			ss << i << " ";
+			ss >> str;
+			vector_str.insert(vector_str.begin(), str);
 		}
-	}
-	catch(const std::exception& e)
-	{
-		//NORMAL ! :P
+		while (vector_str.size())
+			vector_str.erase(vector_str.begin() + rand() % vector_str.size());
 	}
 
-	for (int i = 0; i < COUNT; ++i)
 	{
-		map_int.insert(ft::make_pair(rand(), rand()));
+		stackInt	stack_int;
+
+		for (int i = 0; i < 100000; i++)
+			stack_int.push(i);
+		while (stack_int.size())
+			stack_int.pop();
 	}
 
-	int sum = 0;
-	for (int i = 0; i < 10000; i++)
 	{
-		int access = rand();
-		sum += map_int[access];
+		stackStr	stack_str;
+
+		for (int i = 0; i < 100000; i++) {
+			ss << i << " ";
+			ss >> str;
+			stack_str.push(str);
+		}
+		while (stack_str.size())
+			stack_str.pop();
 	}
-	std::cout << "should be constant with the same seed: " << sum << std::endl;
 
 	{
-		ft::map<int, int> copy = map_int;
+		mapInt		map_int;
+
+		for (int i = 0; i < 100000; i++)
+			map_int.insert(ft::make_pair(i, i));
+		while (map_int.size())
+			map_int.erase(map_int.begin());
 	}
-	MutantStack<char> iterable_stack;
-	for (char letter = 'a'; letter <= 'z'; letter++)
-		iterable_stack.push(letter);
-	for (MutantStack<char>::iterator it = iterable_stack.begin(); it != iterable_stack.end(); it++)
+
 	{
-		std::cout << *it;
+		mapStr		map_str;
+
+		for (int i = 0; i < 100000; i++) {
+			ss << i << " ";
+			ss >> str;
+			map_str.insert(ft::make_pair(str, str));
+		}
+		while (map_str.size())
+			map_str.erase(map_str.begin());
 	}
-	std::cout << std::endl;
+
+	{
+		setInt		set_int;
+
+		for (int i = 0; i < 100000; i++)
+			set_int.insert(i);
+		while (set_int.size())
+			set_int.erase(set_int.begin());
+	}
+
+	{
+		setStr		set_str;
+
+		for (int i = 0; i < 100000; i++) {
+			ss << i << " ";
+			ss >> str;
+			set_str.insert(str);
+		}
+		while (set_str.size())
+			set_str.erase(set_str.begin());
+	}
+
+	t = clock() - t;
+	fileOut << argv[0] << " --> " << static_cast<int>(t) << "\n";
+	fileOut.close();
+
 	return (0);
 }

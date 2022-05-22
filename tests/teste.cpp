@@ -6,30 +6,31 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 23:31:59 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/19 01:20:17 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/21 22:39:35 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "teste.hpp"
-#include <ctime>
+#include <fstream>
 
 int	main( int argc, char *argv[] )
 {
 	std::string	str;
-	clock_t	t = clock();
 
 	if (argc != 1)
 		str = *(argv + 1);
 	else
 		str = "all";
 
-	std::cout << std::endl << std::endl << std::endl;
+	clock_t	t = clock();
+
+	std::cout << std::endl;
 	if (str == "all" || str == "normiter")
 	{
 		std::cout << "*********  Normal Iterator Tests  *********" << std::endl;
 		test_normal_iterator();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "normreviter")
@@ -37,7 +38,7 @@ int	main( int argc, char *argv[] )
 		std::cout << "*****  Normal Reverse Iterator Tests  *****" << std::endl;
 		test_normal_reverse_iterator();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "typetraits")
@@ -45,7 +46,7 @@ int	main( int argc, char *argv[] )
 		std::cout << "***********  Type Traits Tests  ***********" << std::endl;
 		test_type_traits();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "utility")
@@ -53,7 +54,7 @@ int	main( int argc, char *argv[] )
 		std::cout << "*************  Utility Tests  *************" << std::endl;
 		test_utility();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "algorithm")
@@ -61,7 +62,7 @@ int	main( int argc, char *argv[] )
 		std::cout << "************  Algorithm Tests  ************" << std::endl;
 		test_algorithm();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "vector")
@@ -69,7 +70,7 @@ int	main( int argc, char *argv[] )
 		std::cout << "*************  Vector Tests  **************" << std::endl;
 		test_vector();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "stack")
@@ -77,7 +78,7 @@ int	main( int argc, char *argv[] )
 		std::cout << "**************  Stack Tests  **************" << std::endl;
 		test_stack();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "rbmap")
@@ -85,7 +86,7 @@ int	main( int argc, char *argv[] )
 		std::cout << "*************  RB Map Tests  **************" << std::endl;
 		test_rb_map();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "rbset")
@@ -93,7 +94,7 @@ int	main( int argc, char *argv[] )
 		std::cout << "*************  RB Set Tests  **************" << std::endl;
 		test_rb_set();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "rbmapiter")
@@ -101,7 +102,7 @@ int	main( int argc, char *argv[] )
 		std::cout << "*********  RB Map Iterator Tests  *********" << std::endl;
 		test_rb_map_iterator();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "rbsetiter")
@@ -109,7 +110,7 @@ int	main( int argc, char *argv[] )
 		std::cout << "*********  RB Set Iterator Tests  *********" << std::endl;
 		test_rb_set_iterator();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "rbmapreviter")
@@ -117,7 +118,7 @@ int	main( int argc, char *argv[] )
 		std::cout << "*****  RB Map Reverse Iterator Tests  *****" << std::endl;
 		test_rb_map_reverse_iterator();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "rbsetreviter")
@@ -125,7 +126,7 @@ int	main( int argc, char *argv[] )
 		std::cout << "*****  RB Set Reverse Iterator Tests  *****" << std::endl;
 		test_rb_set_reverse_iterator();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "map")
@@ -133,7 +134,7 @@ int	main( int argc, char *argv[] )
 		std::cout << "***************  Map Tests  ***************" << std::endl;
 		test_map();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 
 	if (str == "all" || str == "set")
@@ -141,9 +142,6 @@ int	main( int argc, char *argv[] )
 		std::cout << "***************  Set Tests  ***************" << std::endl;
 		test_set();
 		std::cout << "*******************************************" << std::endl;
-		std::cout << std::endl << std::endl << std::endl;
+		std::cout << std::endl;
 	}
-
-	t = clock() - t;
-	std::cout << static_cast<double>(t) << std::endl;
 }

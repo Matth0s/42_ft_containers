@@ -6,7 +6,7 @@
 #    By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 02:30:49 by mmoreira          #+#    #+#              #
-#    Updated: 2022/05/20 06:09:39 by mmoreira         ###   ########.fr        #
+#    Updated: 2022/05/22 06:27:52 by mmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,12 @@ TEST_SRC	=	teste.cpp \
 				set.cpp
 
 
-OBJ_DIR			=	./builds
-OBJ				=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
-TEST_OBJ		=	$(patsubst %.cpp, $(OBJ_DIR)/%.o, $(TEST_SRC))
+OBJ_FT_DIR		=	./ft_builds
+OBJ_STD_DIR		=	./std_builds
+OBJ_FT			=	$(patsubst %.cpp, $(OBJ_FT_DIR)/%.o, $(SRC))
+OBJ_STD			=	$(patsubst %.cpp, $(OBJ_STD_DIR)/%.o, $(SRC))
+TEST_FT_OBJ		=	$(patsubst %.cpp, $(OBJ_FT_DIR)/%.o, $(TEST_SRC))
+TEST_STD_OBJ	=	$(patsubst %.cpp, $(OBJ_STD_DIR)/%.o, $(TEST_SRC))
 
 
 INCD_DIR		=	-I ./ \
@@ -51,40 +54,66 @@ INCD			=	normal_iterator.hpp reverse_iterator.hpp \
 vpath %.cpp $(SRC_DIR)
 vpath %.hpp $(INCD_DIR)
 
-NAME			=	container
-TEST			=	test
+NAME_FT			=	ft_containers
+NAME_STD		=	std_containers
+TEST_FT			=	ft_test
+TEST_STD		=	std_test
 
-CFLAGS	=
-override CFLAGS	+=	-Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
 
 RM		=	rm -rf
 
 CC		=	c++
 #______________________________________//_______________________________________
-all: $(NAME)
+all: $(NAME_FT) $(NAME_STD)
+	for number in 1 2 3 4 5; do ./std_containers; done
+	for number in 1 2 3 4 5; do ./ft_containers; done
+	awk '{($$1 == "./ft_containers")? ft += $$3: std += $$3;} END {print ft/std;}' log_time
 
-$(NAME):	$(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(INCD_DIR) -o $(NAME)
+test: $(TEST_FT) $(TEST_STD)
+
+$(NAME_FT):		$(OBJ_FT)
+	$(CC) $(CFLAGS) $(OBJ_FT) $(INCD_DIR) -o $(NAME_FT)
 	@echo "\033[1;32m"
 	@echo "/ ************************************ \\"
-	@echo "|             $(NAME) Criado"
+	@echo "|             $(NAME_FT) Criado"
 	@echo "\\ ************************************ /"
 	@echo "\033[0m"
 
-$(TEST):	$(TEST_OBJ)
-	$(CC) $(CFLAGS) $(TEST_OBJ) $(INCD_DIR) -o $(TEST)
+$(NAME_STD):	$(OBJ_STD)
+	$(CC) $(CFLAGS) $(OBJ_STD) $(INCD_DIR) -o $(NAME_STD)
 	@echo "\033[1;32m"
 	@echo "/ ************************************ \\"
-	@echo "|             $(TEST) Criado"
+	@echo "|             $(NAME_STD) Criado"
 	@echo "\\ ************************************ /"
 	@echo "\033[0m"
 
-$(OBJ_DIR)/%.o:	%.cpp $(INCD)
-	mkdir -p $(OBJ_DIR)
+$(TEST_FT):	$(TEST_FT_OBJ)
+	$(CC) $(CFLAGS) $(TEST_FT_OBJ) $(INCD_DIR) -o $(TEST_FT)
+	@echo "\033[1;32m"
+	@echo "/ ************************************ \\"
+	@echo "|             $(TEST_FT) Criado"
+	@echo "\\ ************************************ /"
+	@echo "\033[0m"
+
+$(TEST_STD):	$(TEST_STD_OBJ)
+	$(CC) $(CFLAGS) $(TEST_STD_OBJ) $(INCD_DIR) -o $(TEST_STD)
+	@echo "\033[1;32m"
+	@echo "/ ************************************ \\"
+	@echo "|             $(TEST_STD) Criado"
+	@echo "\\ ************************************ /"
+	@echo "\033[0m"
+
+$(OBJ_FT_DIR)/%.o:	%.cpp $(INCD)
+	mkdir -p $(OBJ_FT_DIR)
 	$(CC) -c -o $@ $(CFLAGS) $(INCD_DIR) $<
+
+$(OBJ_STD_DIR)/%.o:	%.cpp $(INCD)
+	mkdir -p $(OBJ_STD_DIR)
+	$(CC) -c -o $@ $(CFLAGS) -D STD $(INCD_DIR) $<
 #______________________________________//_______________________________________
 clean:
-	$(RM) $(OBJ_DIR)
+	$(RM) $(OBJ_FT_DIR) $(OBJ_STD_DIR)
 	@echo "\033[1;31m"
 	@echo "/ ************************************ \\"
 	@echo "|        Arquivos .o Deletados         |"
@@ -92,7 +121,7 @@ clean:
 	@echo "\033[0m"
 
 fclean:		clean
-	$(RM) $(NAME) $(TEST)
+	$(RM) $(NAME_FT) $(NAME_STD) $(TEST_FT) $(TEST_STD)
 	@echo "\033[1;31m"
 	@echo "/ ************************************ \\"
 	@echo "|            exect Deletado            |"

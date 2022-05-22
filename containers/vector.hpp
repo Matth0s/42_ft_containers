@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 18:58:30 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/20 05:52:08 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/22 00:27:10 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include "reverse_iterator.hpp"
 #include "type_traits.hpp"
 #include "algorithm.hpp"
+
+#include "stdio.h"
 
 namespace ft
 {
@@ -262,7 +264,17 @@ namespace ft
 			};
 
 			iterator	insert( iterator position, const value_type& val ) {
-				difference_type	diff = position - this->begin();
+				difference_type	diff;
+				if (position == this->begin() && this->_data == NULL)
+				{
+					this->reserve(1);
+					diff = 0;
+				}
+				else
+				{
+					diff = position - this->begin();
+				}
+				position = this->begin() + diff;
 				if (this->_size == this->_capacity)
 					this->reserve(this->_capacity * 2);
 				position = this->begin() + diff;
@@ -271,13 +283,22 @@ namespace ft
 					this->_alloc.construct(&(*it), *(it - 1));
 					this->_alloc.destroy(&(*(it - 1)));
 				}
-				this->_alloc.construct(&(*(position)), val);
+				this->_alloc.construct(&(*position), val);
 				this->_size++;
 				return (position);
 			};
 
 			void	insert( iterator position, size_type n, const value_type& val ) {
-				difference_type	diff = position - this->begin();
+				difference_type	diff;
+				if (position == this->begin() && this->_data == NULL)
+				{
+					this->reserve(1);
+					diff = 0;
+				}
+				else
+				{
+					diff = position - this->begin();
+				}
 				if ((this->_size + n > this->_capacity)
 					&& (this->_size + n > this->_size * 2))
 					this->reserve(this->_size + n);
@@ -297,7 +318,16 @@ namespace ft
 			template <class InputIterator>
 			void	insert( iterator position, typename ft::enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type
 							 first, InputIterator last ) {
-				difference_type	diff = position - this->begin();
+				difference_type	diff;
+				if (position == this->begin() && this->_data == NULL)
+				{
+					this->reserve(1);
+					diff = 0;
+				}
+				else
+				{
+					diff = position - this->begin();
+				}
 				size_type		n  = last - first;
 				if ((this->_size + n > this->_capacity)
 					&& (this->_size + n > this->_size * 2))
