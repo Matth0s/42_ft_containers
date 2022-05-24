@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:08:02 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/20 05:58:17 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/25 00:45:04 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,11 @@ namespace ft
 			base_ptr	nodeY;
 
 			if (nodeX == null)
+			{
+				if (null->parent == null)
+					return (null);
 				return (base::max(null->parent, null));
+			}
 			if (nodeX->left != null)
 				return (base::max(nodeX->left, null));
 			else
@@ -82,7 +86,11 @@ namespace ft
 			base_ptr	nodeY;
 
 			if (nodeX == null)
+			{
+				if (null->parent == null)
+					return (null);
 				return (base::max(null->parent, null));
+			}
 			if (nodeX->right != null)
 				return (base::min(nodeX->right, null));
 			else
