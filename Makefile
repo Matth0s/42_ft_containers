@@ -6,7 +6,7 @@
 #    By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 02:30:49 by mmoreira          #+#    #+#              #
-#    Updated: 2022/05/22 06:27:52 by mmoreira         ###   ########.fr        #
+#    Updated: 2022/05/24 23:31:43 by mmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,18 +65,53 @@ RM		=	rm -rf
 
 CC		=	c++
 #______________________________________//_______________________________________
-all: $(NAME_FT) $(NAME_STD)
-	for number in 1 2 3 4 5; do ./std_containers; done
-	for number in 1 2 3 4 5; do ./ft_containers; done
-	awk '{($$1 == "./ft_containers")? ft += $$3: std += $$3;} END {print ft/std;}' log_time
+all: $(NAME_FT) $(NAME_STD) $(TEST_FT) $(TEST_STD)
 
-test: $(TEST_FT) $(TEST_STD)
+vector: all
+	./std_test vector
+	./ft_test vector
+	./std_containers vector
+	./ft_containers vector
+	@awk '{\
+	if ($$1 == "./ft_containers") if($$2 == "vector") ft += $$4;\
+	if ($$1 == "./std_containers") if($$2 == "vector") std += $$4;\
+	} END {print "ft é   " ft/std "x   mais lendo que std"}' log_time
+
+stack: all
+	./std_test stack
+	./ft_test stack
+	./std_containers stack
+	./ft_containers stack
+	@awk '{\
+	if ($$1 == "./ft_containers") if($$2 == "stack") ft += $$4;\
+	if ($$1 == "./std_containers") if($$2 == "stack") std += $$4;\
+	} END {print "ft é   " ft/std "x   mais lendo que std"}' log_time
+
+map: all
+	./std_test map
+	./ft_test map
+	./std_containers map
+	./ft_containers map
+	@awk '{\
+	if ($$1 == "./ft_containers") if($$2 == "map") ft += $$4;\
+	if ($$1 == "./std_containers") if($$2 == "map") std += $$4;\
+	} END {print "ft é   " ft/std "x   mais lendo que std"}' log_time
+
+set: all
+	./std_test set
+	./ft_test set
+	./std_containers set
+	./ft_containers set
+	@awk '{\
+	if ($$1 == "./ft_containers") if($$2 == "set") ft += $$4;\
+	if ($$1 == "./std_containers") if($$2 == "set") std += $$4;\
+	} END {print "ft é   " ft/std "x   mais lendo que std"}' log_time
 
 $(NAME_FT):		$(OBJ_FT)
 	$(CC) $(CFLAGS) $(OBJ_FT) $(INCD_DIR) -o $(NAME_FT)
 	@echo "\033[1;32m"
 	@echo "/ ************************************ \\"
-	@echo "|             $(NAME_FT) Criado"
+	@echo "|       $(NAME_FT) Criado"
 	@echo "\\ ************************************ /"
 	@echo "\033[0m"
 
@@ -84,7 +119,7 @@ $(NAME_STD):	$(OBJ_STD)
 	$(CC) $(CFLAGS) $(OBJ_STD) $(INCD_DIR) -o $(NAME_STD)
 	@echo "\033[1;32m"
 	@echo "/ ************************************ \\"
-	@echo "|             $(NAME_STD) Criado"
+	@echo "|       $(NAME_STD) Criado"
 	@echo "\\ ************************************ /"
 	@echo "\033[0m"
 

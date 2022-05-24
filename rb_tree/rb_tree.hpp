@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 20:11:57 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/20 05:59:53 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:56:27 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -453,6 +453,29 @@ namespace ft
 			key_compare	key_comp( void ) const {
 				return (this->_comp);
 			};
+
+			void	swap( rb_tree& src ) {
+				base_ptr			root = this->_root;
+				base_ptr			null = this->_null;
+				size_type			count = this->_count;
+				key_compare			comp = this->_comp;
+				allocator_type		alloc = this->_alloc;
+				node_allocator_type	node_alloc = this->_node_alloc;
+
+				this->_root = src._root;
+				this->_null = src._null;
+				this->_count = src._count;
+				this->_comp = src._comp;
+				this->_alloc = src._alloc;
+				this->_node_alloc = src._node_alloc;
+
+				src._root = root;
+				src._null = null;
+				src._count = count;
+				src._comp = comp;
+				src._alloc = alloc;
+				src._node_alloc = node_alloc;
+			}
 
 			iterator	find( const key_type& key ) {
 				return (iterator(this->_search(key, this->_root), this->_null));

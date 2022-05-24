@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:33:05 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/20 05:55:39 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/24 18:54:30 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,10 +173,8 @@ namespace ft
 					this->_tree.erase(*first++);
 			};
 
-			void	swap( map& x ) {
-				tree_type	temp = x._tree;
-				x._tree	= this->_tree;
-				this->_tree = temp;
+			void	swap( map& src ) {
+				this->_tree.swap(src._tree);
 			};
 
 			void	clear( void ) {

@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:38:36 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/20 05:53:50 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/24 18:54:55 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,10 +152,8 @@ namespace ft
 					this->_tree.erase(*first++);
 			};
 
-			void	swap( set& x ) {
-				tree_type	temp = x._tree;
-				x._tree	= this->_tree;
-				this->_tree = temp;
+			void	swap( set& src ) {
+				this->_tree.swap(src._tree);
 			};
 
 			void	clear( void ) {
@@ -173,7 +171,7 @@ namespace ft
 			iterator	find( const key_type& key ) {
 				return (this->_tree.find(key));
 			};
-			
+
 			const_iterator	find( const key_type& key ) const {
 				return (this->_tree.find(key));
 			};

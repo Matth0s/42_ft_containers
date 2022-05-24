@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 23:31:59 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/21 22:39:35 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/24 18:55:31 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ int	main( int argc, char *argv[] )
 	else
 		str = "all";
 
-	clock_t	t = clock();
-
-	std::cout << std::endl;
 	if (str == "all" || str == "normiter")
 	{
 		std::cout << "*********  Normal Iterator Tests  *********" << std::endl;
