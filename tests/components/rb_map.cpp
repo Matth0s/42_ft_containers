@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 20:19:41 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/14 21:41:37 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/25 14:18:11 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ void	test_rb_map( void )
 
 		// 	for (int i = 0; i < lenght; i++)
 		// 		tree.insert(mapPair(randomString(1 + (rand()%10)),randomInt(964565)));
-		// 	ft::printRbTree<select1st<mapPair>, mapRbNode*>(tree.root(), tree.null(), 0);
+		// 	ft::printRbTree<ft::select1st<mapPair>, mapRbNode*>(tree.root(), tree.null(), 0);
 		// 	std::cout << std::endl;
 		// }
 	}

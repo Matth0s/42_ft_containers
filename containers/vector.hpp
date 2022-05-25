@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 18:58:30 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/22 00:27:10 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/25 02:20:35 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 #include "reverse_iterator.hpp"
 #include "type_traits.hpp"
 #include "algorithm.hpp"
-
-#include "stdio.h"
 
 namespace ft
 {

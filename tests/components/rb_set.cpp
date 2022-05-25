@@ -6,7 +6,7 @@
 /*   By: mmoreira <mmoreira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 20:05:17 by mmoreira          #+#    #+#             */
-/*   Updated: 2022/05/14 21:41:27 by mmoreira         ###   ########.fr       */
+/*   Updated: 2022/05/25 14:17:58 by mmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void	test_rb_set( void )
 
 	// 	for (int i = 0; i < lenght; i++)
 	// 		tree.insert(randomInt(20));
-	// 	ft::printRbTree<identity<int>, setRbNode*>(tree.root(), tree.null(), 0);
+	// 	ft::printRbTree<ft::identity<int>, setRbNode*>(tree.root(), tree.null(), 0);
 	// 	std::cout << std::endl;
 	// }
 }
